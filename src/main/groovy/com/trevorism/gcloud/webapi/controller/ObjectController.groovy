@@ -29,7 +29,7 @@ class ObjectController {
 
     private static final Logger log = Logger.getLogger(ObjectController.class.name)
     private SecureHttpClient httpClient = new DefaultSecureHttpClient()
-    private static final String baseUrl = "https://datastore.trevorism.com/api/"
+    private static final String baseUrl = "https://datastore.trevorism.com/api"
     private Gson gson = new Gson()
 
     @ApiOperation(value = "Get an object of type {kind} with id {id}")

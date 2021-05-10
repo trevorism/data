@@ -1,6 +1,6 @@
 package com.trevorism.gcloud.webapi.model
 
-class Repository {
+class Repo {
     String id
     String name
     String url
