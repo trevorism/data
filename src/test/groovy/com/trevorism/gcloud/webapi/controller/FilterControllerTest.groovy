@@ -13,7 +13,6 @@ class FilterControllerTest {
         def readFilter = filterController.read(12345)
         assert readFilter.id == "12345"
         assert readFilter.name == "testFilter"
-
     }
 
     @Test

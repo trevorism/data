@@ -13,19 +13,11 @@ import javax.ws.rs.ext.Provider
 @Created
 class CreatedFilter implements ContainerResponseFilter {
 
-
     @Override
     void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) {
         if(!responseContext.entity)
             return
         responseContext.setStatus(Response.Status.CREATED.statusCode)
-        String url = createLocationUrl(responseContext)
-        responseContext.getHeaders().add("location", url)
     }
 
-
-    private String createLocationUrl(ContainerResponseContext responseContext) {
-        def key = responseContext.entity.key
-        return "${key.kind}/${key.id}"
-    }
 }
