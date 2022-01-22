@@ -15,7 +15,7 @@ import javax.ws.rs.Produces
 import javax.ws.rs.core.MediaType
 
 @Api("Aggregation Operations")
-@Path("aggregation/result")
+@Path("aggregation")
 class AggregationController {
 
     @ApiOperation(value = "Perform a data operation and get a result **Secure")

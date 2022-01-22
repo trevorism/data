@@ -16,7 +16,7 @@ import javax.ws.rs.Produces
 import javax.ws.rs.core.MediaType
 
 @Api("Sort Operations")
-@Path("sort/result")
+@Path("sort")
 class SortController {
 
     @ApiOperation(value = "Perform a data operation and get a result **Secure")

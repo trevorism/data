@@ -16,7 +16,7 @@ import javax.ws.rs.Produces
 import javax.ws.rs.core.MediaType
 
 @Api("Transfer Operations")
-@Path("transfer/result")
+@Path("transfer")
 class TransferController {
 
     @ApiOperation(value = "Perform a data operation and get a result **Secure")

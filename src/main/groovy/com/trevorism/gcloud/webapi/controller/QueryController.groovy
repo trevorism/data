@@ -20,7 +20,7 @@ import javax.ws.rs.Produces
 import javax.ws.rs.core.MediaType
 
 @Api("Query Operations")
-@Path("query/result")
+@Path("query")
 class QueryController {
 
     private final SecureHttpClient client = new DefaultSecureHttpClient();

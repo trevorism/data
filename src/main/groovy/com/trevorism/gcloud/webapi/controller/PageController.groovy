@@ -16,7 +16,7 @@ import javax.ws.rs.Produces
 import javax.ws.rs.core.MediaType
 
 @Api("Page Operations")
-@Path("page/result")
+@Path("page")
 class PageController {
 
     @ApiOperation(value = "Perform a data operation and get a result **Secure")
