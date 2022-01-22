@@ -1,6 +1,7 @@
 package com.trevorism.gcloud.webapi.model.searching
 
-class Search {
-    String id
+import com.trevorism.gcloud.webapi.model.SingleDatasourceRequest
+
+class Search extends SingleDatasourceRequest {
     String query
 }

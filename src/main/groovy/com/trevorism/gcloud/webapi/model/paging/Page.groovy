@@ -1,8 +1,9 @@
 package com.trevorism.gcloud.webapi.model.paging
 
-class Page {
-    String id
+import com.trevorism.gcloud.webapi.model.SingleDatasourceRequest
+
+class Page extends SingleDatasourceRequest{
     int page
     int pageSize
-
+    int limit
 }

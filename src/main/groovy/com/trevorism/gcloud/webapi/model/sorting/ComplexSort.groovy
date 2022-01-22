@@ -1,7 +1,8 @@
 package com.trevorism.gcloud.webapi.model.sorting
 
-class ComplexSort {
-    String id
+import com.trevorism.gcloud.webapi.model.SingleDatasourceRequest
+
+class ComplexSort extends SingleDatasourceRequest{
     List<Sort> sorts
 
 }

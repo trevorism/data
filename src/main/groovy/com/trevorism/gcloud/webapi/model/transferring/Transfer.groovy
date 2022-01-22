@@ -1,7 +1,8 @@
 package com.trevorism.gcloud.webapi.model.transferring
 
-class Transfer {
-    String id
-    Repository source
-    Repository destination
+import com.trevorism.gcloud.webapi.model.MultiDatasourceRequest
+
+class Transfer extends MultiDatasourceRequest {
+    String singleRepositoryLookup
+    String destinationRepositoryLookup
 }
