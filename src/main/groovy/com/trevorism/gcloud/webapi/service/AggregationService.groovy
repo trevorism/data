@@ -4,5 +4,5 @@ import com.trevorism.gcloud.webapi.model.aggregating.Aggregation
 
 interface AggregationService {
 
-    def aggregate(Long datasetId, Aggregation request)
+    def aggregate(Aggregation request)
 }

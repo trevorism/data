@@ -4,5 +4,5 @@ import com.trevorism.gcloud.webapi.model.searching.Search
 
 interface SearchService {
 
-    def search(Long datasetId, Search search)
+    def search(Search search)
 }

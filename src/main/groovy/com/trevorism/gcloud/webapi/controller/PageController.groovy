@@ -1,7 +1,11 @@
 package com.trevorism.gcloud.webapi.controller
 
+import com.trevorism.data.PingingDatastoreRepository
+import com.trevorism.data.Repository
 import com.trevorism.gcloud.webapi.model.Query
 import com.trevorism.gcloud.webapi.model.paging.Page
+import com.trevorism.gcloud.webapi.service.PagingService
+import com.trevorism.gcloud.webapi.service.paging.InMemoryPagingService
 import com.trevorism.secure.Roles
 import com.trevorism.secure.Secure
 import io.swagger.annotations.Api
@@ -19,13 +23,16 @@ import javax.ws.rs.core.MediaType
 @Path("page")
 class PageController {
 
+    private PagingService pagingService = new InMemoryPagingService()
+    private Repository<Page> repo = new PingingDatastoreRepository<>(Page)
+
     @ApiOperation(value = "Perform a data operation and get a result **Secure")
     @POST
     @Secure(value = Roles.SYSTEM, allowInternal = true)
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     def operate(Page paging){
-
+        pagingService.page(paging)
     }
 
     @ApiOperation(value = "Get results of a saved data operation **Secure")
@@ -34,6 +41,7 @@ class PageController {
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     def operateById(@PathParam("id") String id){
-
+        Page paging = repo.get(id)
+        operate(paging)
     }
 }

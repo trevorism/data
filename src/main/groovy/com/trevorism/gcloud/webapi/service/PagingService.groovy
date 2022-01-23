@@ -5,6 +5,6 @@ import com.trevorism.gcloud.webapi.model.paging.Page
 
 interface PagingService {
 
-    def page(Long datasetId, Page pagingRequest)
+    def page(Page pagingRequest)
 
 }
