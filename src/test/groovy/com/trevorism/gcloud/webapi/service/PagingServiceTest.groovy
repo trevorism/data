@@ -35,14 +35,13 @@ class PagingServiceTest {
     }
 
     @Test
-    void testPagingOutofBounds(){
+    void testPagingOutOfBounds(){
         InMemoryPagingService service = new InMemoryPagingService()
         service.lookupService = {  createFakeData(10)} as LookupService
 
         def result = service.page(new Page(lookup: "datastore:alert", page: 5, pageSize: 3))
         assert result.size() == 0
     }
-
 
     @Test
     void testPagingNearEnd(){

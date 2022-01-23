@@ -1,7 +1,14 @@
 package com.trevorism.gcloud.webapi.controller
 
+import com.trevorism.data.PingingDatastoreRepository
+import com.trevorism.data.Repository
 import com.trevorism.gcloud.webapi.model.filtering.ComplexFilter
+import com.trevorism.gcloud.webapi.model.paging.Page
 import com.trevorism.gcloud.webapi.model.sorting.ComplexSort
+import com.trevorism.gcloud.webapi.service.PagingService
+import com.trevorism.gcloud.webapi.service.SortService
+import com.trevorism.gcloud.webapi.service.paging.InMemoryPagingService
+import com.trevorism.gcloud.webapi.service.sorting.InMemorySortService
 import com.trevorism.secure.Roles
 import com.trevorism.secure.Secure
 import io.swagger.annotations.Api
@@ -19,13 +26,16 @@ import javax.ws.rs.core.MediaType
 @Path("sort")
 class SortController {
 
+    private SortService sortService = new InMemorySortService()
+    private Repository<ComplexSort> repo = new PingingDatastoreRepository<>(ComplexSort)
+
     @ApiOperation(value = "Perform a data operation and get a result **Secure")
     @POST
     @Secure(value = Roles.SYSTEM, allowInternal = true)
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    def operate(ComplexSort sort){
-
+    def operate(ComplexSort complexSort){
+        sortService.sort(complexSort)
     }
 
     @ApiOperation(value = "Get results of a saved data operation **Secure")
@@ -34,6 +44,7 @@ class SortController {
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     def operateById(@PathParam("id") String id){
-
+        ComplexSort complexSort = repo.get(id)
+        operate(complexSort)
     }
 }
