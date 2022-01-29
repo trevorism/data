@@ -24,37 +24,12 @@ class InMemoryFilterService implements FilterService{
     }
 
     private boolean applyComplexFilter(row, ComplexFilter request) {
-        if(request.type == FilterConstants.AND && request.complexFilters){
-            boolean truth = true
-            request.complexFilters.each {
-                truth = truth && applyComplexFilter(row, it)
-            }
-            return truth
+        if(request.type == FilterConstants.AND){
+            return handleConjunction(request, row)
         }
 
-        if(request.type == FilterConstants.AND && request.simpleFilters){
-            boolean truth = true
-            request.simpleFilters.each {
-                truth = truth && applySimpleFilter(row, it)
-            }
-            return truth
-        }
-
-
-        if(request.type == FilterConstants.OR && request.complexFilters){
-            boolean truth = false
-            request.complexFilters.each {
-                truth = truth || applyComplexFilter(row, it)
-            }
-            return truth
-        }
-
-        if(request.type == FilterConstants.OR && request.simpleFilters){
-            boolean truth = false
-            request.simpleFilters.each {
-                truth = truth || applySimpleFilter(row, it)
-            }
-            return truth
+        if(request.type == FilterConstants.OR){
+            return handleDisjunction(request, row)
         }
 
         if (request.simpleFilters) {
@@ -62,6 +37,28 @@ class InMemoryFilterService implements FilterService{
         }
 
         return false
+    }
+
+    private boolean handleDisjunction(ComplexFilter request, row) {
+        boolean truth = false
+        request.complexFilters.each {
+            truth = truth || applyComplexFilter(row, it)
+        }
+        request.simpleFilters.each {
+            truth = truth || applySimpleFilter(row, it)
+        }
+        return truth
+    }
+
+    private boolean handleConjunction(ComplexFilter request, row) {
+        boolean truth = true
+        request.complexFilters.each {
+            truth = truth && applyComplexFilter(row, it)
+        }
+        request.simpleFilters.each {
+            truth = truth && applySimpleFilter(row, it)
+        }
+        return truth
     }
 
     private boolean applySimpleFilter(Map<String,Object> row, SimpleFilter filter) {
