@@ -11,6 +11,7 @@ import java.time.Instant
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
+import java.util.logging.Filter
 
 class FilterServiceTest {
 
@@ -91,7 +92,7 @@ class FilterServiceTest {
     }
 
     @Test
-    void testDateFilteringAnd() {
+    void testAndFiltering() {
         InMemoryFilterService service = new InMemoryFilterService()
         service.lookupService = { createFakeData() } as LookupService
 
@@ -105,6 +106,45 @@ class FilterServiceTest {
         assert result[0].id == 1
         assert result[1].id == 3
     }
+
+    @Test
+    void testOrFiltering() {
+        InMemoryFilterService service = new InMemoryFilterService()
+        service.lookupService = { createFakeData() } as LookupService
+
+        def result = service.filter(new ComplexFilter(type: FilterConstants.OR,
+                simpleFilters: [
+                        new SimpleFilter(type: FilterConstants.TYPE_NUMBER, field: "age", operator: FilterConstants.OPERATOR_GREATER_THAN, value: "20"),
+                        new SimpleFilter(field: "name", operator: FilterConstants.OPERATOR_LESS_THAN, value: "Ro"),
+                ]))
+
+        assert result.size() == 2
+        assert result[0].id == 1
+        assert result[1].id == 4
+    }
+
+    @Test
+    void testComplexFiltering() {
+        InMemoryFilterService service = new InMemoryFilterService()
+        service.lookupService = { createFakeData() } as LookupService
+
+        def result = service.filter(new ComplexFilter(type: FilterConstants.OR,
+                simpleFilters: [
+                        new SimpleFilter(type: FilterConstants.TYPE_NUMBER, field: "age", operator: FilterConstants.OPERATOR_GREATER_THAN, value: "20"),
+                ],
+                complexFilters: [
+                        new ComplexFilter(type: FilterConstants.AND, simpleFilters: [
+                                new SimpleFilter(type: FilterConstants.TYPE_NUMBER, field: "age", operator: FilterConstants.OPERATOR_LESS_THAN_OR_EQUAL, value: "10"),
+                                new SimpleFilter(field: "name", operator: FilterConstants.OPERATOR_GREATER_THAN, value: "Ro"),
+                        ])
+                ]
+        ))
+
+        assert result.size() == 2
+        assert result[0].id == 2
+        assert result[1].id == 4
+    }
+
 
     private List<Map> createFakeData() {
         def list = []
