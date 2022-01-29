@@ -11,7 +11,6 @@ import java.time.Instant
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
-import java.util.logging.Filter
 
 class FilterServiceTest {
 

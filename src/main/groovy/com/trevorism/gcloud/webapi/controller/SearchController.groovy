@@ -1,7 +1,14 @@
 package com.trevorism.gcloud.webapi.controller
 
+import com.trevorism.data.PingingDatastoreRepository
+import com.trevorism.data.Repository
 import com.trevorism.gcloud.webapi.model.Query
+import com.trevorism.gcloud.webapi.model.filtering.ComplexFilter
 import com.trevorism.gcloud.webapi.model.searching.Search
+import com.trevorism.gcloud.webapi.service.FilterService
+import com.trevorism.gcloud.webapi.service.SearchService
+import com.trevorism.gcloud.webapi.service.filter.InMemoryFilterService
+import com.trevorism.gcloud.webapi.service.searching.InMemorySearchService
 import com.trevorism.secure.Roles
 import com.trevorism.secure.Secure
 import io.swagger.annotations.Api
@@ -20,6 +27,8 @@ import javax.ws.rs.core.MediaType
 @Path("search")
 class SearchController {
 
+    private SearchService searchService = new InMemorySearchService()
+    private Repository<Search> repo = new PingingDatastoreRepository<>(Search)
 
     @ApiOperation(value = "Perform a data operation and get a result **Secure")
     @POST
@@ -27,7 +36,7 @@ class SearchController {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     def operate(Search query){
-
+        searchService.search(query)
     }
 
     @ApiOperation(value = "Get results of a saved data operation **Secure")
@@ -36,6 +45,7 @@ class SearchController {
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     def operateById(@PathParam("id") String id){
-
+        def query = repo.get(id)
+        operate(query)
     }
 }
