@@ -4,6 +4,8 @@ class FilterConstants {
     static final String TYPE_STRING = "string"
     static final String TYPE_NUMBER = "number"
     static final String TYPE_DATE = "date"
+
+    static final String SIMPLE = "simple"
     static final String AND = "and"
     static final String OR = "or"
 
