@@ -1,15 +1,12 @@
 package com.trevorism.gcloud.webapi.model.describing
 
-import jdk.nashorn.internal.scripts.JO
-
-import javax.ws.rs.DELETE
-
 class DescribeConstants {
     static final String AGGREGATE = "aggregate"
     static final String LIST = "list"
     static final String CREATE = "create"
     static final String READ = "read"
     static final String UPDATE = "update"
+    static final String DELETE = "delete"
     static final String FILTER = "filter"
     static final String PAGE = "page"
     static final String SEARCH = "search"

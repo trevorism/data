@@ -1,4 +1,4 @@
-package com.trevorism.gcloud.webapi.service.searching
+package com.trevorism.gcloud.webapi.service.search
 
 import com.trevorism.gcloud.webapi.model.searching.Search
 import com.trevorism.gcloud.webapi.service.SearchService

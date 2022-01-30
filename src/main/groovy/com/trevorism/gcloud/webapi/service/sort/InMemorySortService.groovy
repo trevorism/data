@@ -1,4 +1,4 @@
-package com.trevorism.gcloud.webapi.service.sorting
+package com.trevorism.gcloud.webapi.service.sort
 
 import com.trevorism.gcloud.webapi.model.sorting.ComplexSort
 import com.trevorism.gcloud.webapi.service.SortService

@@ -2,13 +2,9 @@ package com.trevorism.gcloud.webapi.controller
 
 import com.trevorism.data.PingingDatastoreRepository
 import com.trevorism.data.Repository
-import com.trevorism.gcloud.webapi.model.filtering.ComplexFilter
-import com.trevorism.gcloud.webapi.model.paging.Page
 import com.trevorism.gcloud.webapi.model.sorting.ComplexSort
-import com.trevorism.gcloud.webapi.service.PagingService
 import com.trevorism.gcloud.webapi.service.SortService
-import com.trevorism.gcloud.webapi.service.paging.InMemoryPagingService
-import com.trevorism.gcloud.webapi.service.sorting.InMemorySortService
+import com.trevorism.gcloud.webapi.service.sort.InMemorySortService
 import com.trevorism.secure.Roles
 import com.trevorism.secure.Secure
 import io.swagger.annotations.Api

@@ -3,7 +3,7 @@ package com.trevorism.gcloud.webapi.service
 import com.trevorism.gcloud.webapi.model.sorting.ComplexSort
 import com.trevorism.gcloud.webapi.model.sorting.Sort
 import com.trevorism.gcloud.webapi.service.lookup.LookupService
-import com.trevorism.gcloud.webapi.service.sorting.InMemorySortService
+import com.trevorism.gcloud.webapi.service.sort.InMemorySortService
 import org.junit.Test
 
 class SortServiceTest {

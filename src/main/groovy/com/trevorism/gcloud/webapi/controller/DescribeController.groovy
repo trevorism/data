@@ -3,6 +3,8 @@ package com.trevorism.gcloud.webapi.controller
 import com.trevorism.gcloud.webapi.model.SingleDatasourceRequest
 import com.trevorism.gcloud.webapi.model.describing.Describe
 import com.trevorism.gcloud.webapi.model.searching.Search
+import com.trevorism.gcloud.webapi.service.DescribeService
+import com.trevorism.gcloud.webapi.service.describe.InMemoryDescribeService
 import com.trevorism.secure.Roles
 import com.trevorism.secure.Secure
 import io.swagger.annotations.Api
@@ -20,13 +22,15 @@ import javax.ws.rs.core.MediaType
 @Path("describe")
 class DescribeController {
 
+    DescribeService service = new InMemoryDescribeService()
+
     @ApiOperation(value = "Perform a data operation and get a result **Secure")
     @POST
     @Secure(value = Roles.SYSTEM, allowInternal = true)
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     def operate(Describe query){
-
+        service.describe(query)
     }
 
     @ApiOperation(value = "Get results of a saved data operation **Secure")
@@ -35,6 +39,6 @@ class DescribeController {
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     def operateById(@PathParam("id") String id){
-
+        service.describe(null)
     }
 }

@@ -1,12 +1,8 @@
 package com.trevorism.gcloud.webapi.service
 
-import com.trevorism.gcloud.webapi.model.filtering.ComplexFilter
-import com.trevorism.gcloud.webapi.model.filtering.FilterConstants
-import com.trevorism.gcloud.webapi.model.filtering.SimpleFilter
 import com.trevorism.gcloud.webapi.model.searching.Search
-import com.trevorism.gcloud.webapi.service.filter.InMemoryFilterService
 import com.trevorism.gcloud.webapi.service.lookup.LookupService
-import com.trevorism.gcloud.webapi.service.searching.InMemorySearchService
+import com.trevorism.gcloud.webapi.service.search.InMemorySearchService
 import org.junit.Test
 
 import java.time.Instant

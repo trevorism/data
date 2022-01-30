@@ -2,13 +2,9 @@ package com.trevorism.gcloud.webapi.controller
 
 import com.trevorism.data.PingingDatastoreRepository
 import com.trevorism.data.Repository
-import com.trevorism.gcloud.webapi.model.Query
-import com.trevorism.gcloud.webapi.model.filtering.ComplexFilter
 import com.trevorism.gcloud.webapi.model.searching.Search
-import com.trevorism.gcloud.webapi.service.FilterService
 import com.trevorism.gcloud.webapi.service.SearchService
-import com.trevorism.gcloud.webapi.service.filter.InMemoryFilterService
-import com.trevorism.gcloud.webapi.service.searching.InMemorySearchService
+import com.trevorism.gcloud.webapi.service.search.InMemorySearchService
 import com.trevorism.secure.Roles
 import com.trevorism.secure.Secure
 import io.swagger.annotations.Api
