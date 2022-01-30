@@ -26,19 +26,24 @@ class DescribeController {
 
     @ApiOperation(value = "Perform a data operation and get a result **Secure")
     @POST
-    @Secure(value = Roles.SYSTEM, allowInternal = true)
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     def operate(Describe query){
-        service.describe(query)
+        service.describe(null)
     }
 
     @ApiOperation(value = "Get results of a saved data operation **Secure")
     @GET
-    @Secure(value = Roles.SYSTEM, allowInternal = true)
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     def operateById(@PathParam("id") String id){
+        service.describe(null)
+    }
+
+    @ApiOperation(value = "Get results of a saved data operation **Secure")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    def describe(){
         service.describe(null)
     }
 }

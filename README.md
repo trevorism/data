@@ -6,8 +6,48 @@
 ![GitHub language count](https://img.shields.io/github/languages/count/trevorism/data)
 ![GitHub top language](https://img.shields.io/github/languages/top/trevorism/data)
 
-Creates an high-level interface for data access, creation, updates, deletion, and filtering for Trevorism Data
+Creates a high-level interface for data operations for Trevorism Data. The full list of operations can be found [here](https://data.trevorism.com/describe).
 
-Current version: 0.0.1
+Introduces the concept of a data locator of the form <repository>:<path_to_data> which allows all operations to find a dataset.
 
-Deployed to https://data.trevorism.com
+Operations are classified into two types, Single Datastore and Multi Datastore. A Query interface chains all single datastore operations into a single interface.
+
+Here's an example:
+
+HTTP POST: https://data.trevorism.com/query
+```json
+{
+  "lookup": "datastore:button",
+  "fields": [
+    "description","name","parameters","topicname"
+  ],
+  "where": {
+    "simpleFilters": [
+      {
+        "field": "name",
+        "operator": "<",
+        "value": "Test"
+      }
+    ]
+  },
+  "order": {
+    "sorts": [
+      {
+        "field": "topicname",
+        "descending": true
+      }
+    ]
+  },
+  "limit": {
+    "page": 0,
+    "pageSize": 0,
+    "limit": 3
+  }
+}
+
+```
+
+
+Current version: 0.1.0
+
+Deployed to [Trevorism Data](https://data.trevorism.com)
