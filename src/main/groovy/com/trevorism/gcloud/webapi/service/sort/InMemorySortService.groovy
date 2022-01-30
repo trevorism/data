@@ -13,7 +13,10 @@ class InMemorySortService implements SortService{
     def sort(ComplexSort request) {
         def dataset = lookupService.lookupDataset(request)
 
-        request.sorts?.reverse().each {simpleSort ->
+        if(!request || !request.sorts)
+            return dataset
+
+        request.sorts.reverse().each {simpleSort ->
             if(simpleSort.descending)
                 dataset = dataset.sort{x1, x2 -> x2[simpleSort.field?.toLowerCase()] <=> x1[simpleSort.field?.toLowerCase()]}
             else

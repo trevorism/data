@@ -22,7 +22,7 @@ import javax.ws.rs.core.MediaType
 @Path("describe")
 class DescribeController {
 
-    DescribeService service = new InMemoryDescribeService()
+    private DescribeService service = new InMemoryDescribeService()
 
     @ApiOperation(value = "Perform a data operation and get a result **Secure")
     @POST

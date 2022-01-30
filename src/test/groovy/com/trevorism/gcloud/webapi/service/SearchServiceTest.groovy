@@ -32,6 +32,15 @@ class SearchServiceTest {
         assert !result
     }
 
+    @Test
+    void testEmpty() {
+        InMemorySearchService service = new InMemorySearchService()
+        service.lookupService = { createFakeData() } as LookupService
+
+        def result = service.search(new Search())
+        assert result
+    }
+
     private List<Map> createFakeData() {
         def list = []
         list << [id: 1, age: 10, name: "Ren", birthday: Date.from(Instant.now().minus(1, ChronoUnit.DAYS))]

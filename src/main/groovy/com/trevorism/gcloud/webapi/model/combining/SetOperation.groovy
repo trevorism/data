@@ -4,5 +4,5 @@ import com.trevorism.gcloud.webapi.model.MultiDatasourceRequest
 
 class SetOperation extends MultiDatasourceRequest {
     String type
-    List<String> datasetUrls
+    List<String> datasetUrls = []
 }

@@ -12,6 +12,9 @@ class InMemorySearchService implements SearchService{
     @Override
     def search(Search search) {
         def dataset = lookupService.lookupDataset(search)
+        if(!search?.query)
+            return dataset
+
         dataset.findAll { row ->
             boolean truth = false
             row.each { k,v ->

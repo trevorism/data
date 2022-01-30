@@ -1,8 +1,10 @@
 package com.trevorism.gcloud.webapi.service
 
+import com.trevorism.gcloud.webapi.model.aggregating.Aggregation
 import com.trevorism.gcloud.webapi.model.filtering.ComplexFilter
 import com.trevorism.gcloud.webapi.model.filtering.FilterConstants
 import com.trevorism.gcloud.webapi.model.filtering.SimpleFilter
+import com.trevorism.gcloud.webapi.service.aggregate.InMemoryAggregationService
 import com.trevorism.gcloud.webapi.service.filter.InMemoryFilterService
 import com.trevorism.gcloud.webapi.service.lookup.LookupService
 import org.junit.Test
@@ -144,6 +146,13 @@ class FilterServiceTest {
         assert result[1].id == 4
     }
 
+    @Test
+    void testNullEmptyFilter() {
+        InMemoryFilterService service = new InMemoryFilterService()
+        service.lookupService = { createFakeData() } as LookupService
+        assert service.filter(new ComplexFilter()).size() == 4
+
+    }
 
     private List<Map> createFakeData() {
         def list = []

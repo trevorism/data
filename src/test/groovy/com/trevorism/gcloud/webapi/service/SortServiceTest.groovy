@@ -8,7 +8,6 @@ import org.junit.Test
 
 class SortServiceTest {
 
-
     @Test
     void testSimpleSorting(){
         InMemorySortService service = new InMemorySortService()
@@ -80,6 +79,14 @@ class SortServiceTest {
         assert result[1].id == 2
         assert result[2].id == 3
         assert result[3].id == 4
+    }
+
+    @Test
+    void testEmpty(){
+        InMemorySortService service = new InMemorySortService()
+        service.lookupService = {createFakeData()} as LookupService
+        def result = service.sort(new ComplexSort())
+        assert result
     }
 
     private List<Map> createFakeData(){

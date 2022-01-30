@@ -13,6 +13,9 @@ class InMemoryPagingService implements PagingService{
     def page(Page pagingRequest) {
         def dataset = lookupService.lookupDataset(pagingRequest)
 
+        if(!pagingRequest)
+            return dataset
+
         if(pagingRequest.page == 0 || pagingRequest.pageSize == 0){
             if(pagingRequest.limit == 0)
                 return dataset

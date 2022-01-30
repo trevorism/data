@@ -18,6 +18,9 @@ class InMemoryFilterService implements FilterService{
     def filter(ComplexFilter request) {
         def dataset = lookupService.lookupDataset(request)
 
+        if(!request?.simpleFilters && !request?.complexFilters)
+            return dataset
+
         dataset.findAll { row ->
             return applyComplexFilter(row, request)
         }

@@ -52,6 +52,16 @@ class PagingServiceTest {
         assert result.size() == 1
     }
 
+    @Test
+    void testEmptyPaging(){
+        InMemoryPagingService service = new InMemoryPagingService()
+        service.lookupService = { createFakeData(10)} as LookupService
+
+        def result = service.page(new Page())
+        assert result.size() == 10
+    }
+
+
     private List<Map> createFakeData(int count){
         def list = []
         count.times{list << [id:it] }
