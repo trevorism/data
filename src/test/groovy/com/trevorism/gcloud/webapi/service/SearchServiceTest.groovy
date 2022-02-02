@@ -43,10 +43,10 @@ class SearchServiceTest {
 
     private List<Map> createFakeData() {
         def list = []
-        list << [id: 1, age: 10, name: "Ren", birthday: Date.from(Instant.now().minus(1, ChronoUnit.DAYS))]
-        list << [id: 2, age: 7, name: "Stimpy", birthday: Date.from(Instant.now().minus(0, ChronoUnit.DAYS))]
-        list << [id: 3, age: 20, name: "Trev", birthday: Date.from(Instant.now().minus(20, ChronoUnit.DAYS))]
-        list << [id: 4, age: 22, name: "Ism", birthday: Date.from(Instant.now().minus(22, ChronoUnit.DAYS))]
+        list << [id: 1, age: 10, name: "Ren", birthday: Instant.now().minus(1, ChronoUnit.DAYS)]
+        list << [id: 2, age: 7, name: "Stimpy", birthday: Instant.now().minus(0, ChronoUnit.DAYS)]
+        list << [id: 3, age: 20, name: "Trev", birthday: Instant.now().minus(20, ChronoUnit.DAYS)]
+        list << [id: 4, age: 22, name: "Ism", birthday: Instant.now().minus(22, ChronoUnit.DAYS)]
         return list
     }
 }

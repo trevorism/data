@@ -1,10 +1,8 @@
 package com.trevorism.gcloud.webapi.service
 
-import com.trevorism.gcloud.webapi.model.aggregating.Aggregation
 import com.trevorism.gcloud.webapi.model.filtering.ComplexFilter
 import com.trevorism.gcloud.webapi.model.filtering.FilterConstants
 import com.trevorism.gcloud.webapi.model.filtering.SimpleFilter
-import com.trevorism.gcloud.webapi.service.aggregate.InMemoryAggregationService
 import com.trevorism.gcloud.webapi.service.filter.InMemoryFilterService
 import com.trevorism.gcloud.webapi.service.lookup.LookupService
 import org.junit.Test
