@@ -2,7 +2,6 @@ package com.trevorism.gcloud.webapi.controller
 
 import com.trevorism.data.PingingDatastoreRepository
 import com.trevorism.data.Repository
-import com.trevorism.gcloud.webapi.model.Query
 import com.trevorism.gcloud.webapi.model.paging.Page
 import com.trevorism.gcloud.webapi.service.PagingService
 import com.trevorism.gcloud.webapi.service.paging.InMemoryPagingService
