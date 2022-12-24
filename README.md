@@ -4,6 +4,10 @@
 ![GitHub language count](https://img.shields.io/github/languages/count/trevorism/data)
 ![GitHub top language](https://img.shields.io/github/languages/top/trevorism/data)
 
+Current version: 0.2.1
+
+Deployed to [Trevorism Data](https://data.trevorism.com)
+
 Creates a high-level interface for data operations for Trevorism Data. The full list of operations can be found [here](https://data.trevorism.com/describe).
 
 Introduces the concept of a data locator of the form <repository>:<path_to_data> which allows all operations to find a dataset.
@@ -44,8 +48,3 @@ HTTP POST: https://data.trevorism.com/query
 }
 
 ```
-
-
-Current version: 0.1.0
-
-Deployed to [Trevorism Data](https://data.trevorism.com)

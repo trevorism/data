@@ -16,7 +16,7 @@ jobs:
     with:
       gcp_project: 'trevorism-data'
       gcp_project_id: '381816155418'
-      version: '0-2-0'
+      version: '0-2-1'
     secrets:
       CLIENT_ID: ${{ secrets.CLIENT_ID }}
       CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
