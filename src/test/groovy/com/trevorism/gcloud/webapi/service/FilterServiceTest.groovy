@@ -160,4 +160,13 @@ class FilterServiceTest {
         list << [id: 4, age: 22, name: "Ism", birthday: Date.from(Instant.now().minus(22, ChronoUnit.DAYS))]
         return list
     }
+
+    @Test
+    void testParseDatesWithDifferentFormats(){
+        InMemoryFilterService service = new InMemoryFilterService()
+        assert service.parseDateValue("2022-12-24T15:49:40Z")
+        assert service.parseDateValue("2022-12-24T15:44:23.821Z")
+        assert service.parseDateValue("2022-12-24T15:49:40")
+
+    }
 }

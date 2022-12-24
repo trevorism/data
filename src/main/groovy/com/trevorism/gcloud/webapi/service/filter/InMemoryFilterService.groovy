@@ -9,6 +9,7 @@ import com.trevorism.gcloud.webapi.service.lookup.LookupService
 
 import java.time.LocalDateTime
 import java.time.ZoneOffset
+import java.time.ZonedDateTime
 
 class InMemoryFilterService implements FilterService{
 
@@ -67,7 +68,7 @@ class InMemoryFilterService implements FilterService{
     private boolean applySimpleFilter(Map<String,Object> row, SimpleFilter filter) {
         def value = filter.value
         if(filter.type?.toLowerCase() == FilterConstants.TYPE_DATE)
-            value = Date.from(LocalDateTime.parse(value).toInstant(ZoneOffset.UTC))
+            value = parseDateValue(value)
         else if(filter.type?.toLowerCase() == FilterConstants.TYPE_NUMBER)
             value = Double.valueOf(value)
 
@@ -79,5 +80,15 @@ class InMemoryFilterService implements FilterService{
             case FilterConstants.OPERATOR_LESS_THAN_OR_EQUAL: return row[filter.field.toLowerCase()] <= value
             case FilterConstants.OPERATOR_NOT_EQUAL: return row[filter.field.toLowerCase()] != value
         }
+    }
+
+    private Date parseDateValue(String value) {
+        try{
+            return Date.from(LocalDateTime.parse(value).toInstant(ZoneOffset.UTC))
+        }catch(ignored){}
+        try{
+            //return Date.from(ZonedDateTime.parse(value).toInstant())
+        }catch(ignored){}
+        throw new RuntimeException("Unparseable date: ${value}")
     }
 }
