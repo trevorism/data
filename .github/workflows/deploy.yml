@@ -24,7 +24,13 @@ jobs:
 
   call-accept-before:
     uses: trevorism/actions-workflows/.github/workflows/accept.yml@master
+    secrets:
+      CLIENT_ID: ${{ secrets.CLIENT_ID }}
+      CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
 
   call-accept-after:
     uses: trevorism/actions-workflows/.github/workflows/accept.yml@master
     needs: call-deploy
+    secrets:
+      CLIENT_ID: ${{ secrets.CLIENT_ID }}
+      CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
