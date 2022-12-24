@@ -87,7 +87,7 @@ class InMemoryFilterService implements FilterService{
             return Date.from(LocalDateTime.parse(value).toInstant(ZoneOffset.UTC))
         }catch(ignored){}
         try{
-            //return Date.from(ZonedDateTime.parse(value).toInstant())
+            return Date.from(ZonedDateTime.parse(value).toInstant())
         }catch(ignored){}
         throw new RuntimeException("Unparseable date: ${value}")
     }
