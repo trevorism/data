@@ -67,18 +67,26 @@ class InMemoryFilterService implements FilterService{
 
     private boolean applySimpleFilter(Map<String,Object> row, SimpleFilter filter) {
         def value = filter.value
-        if(filter.type?.toLowerCase() == FilterConstants.TYPE_DATE)
+        def objField = row[filter.field.toLowerCase()]
+        if(filter.type?.toLowerCase() == FilterConstants.TYPE_DATE){
             value = parseDateValue(value)
-        else if(filter.type?.toLowerCase() == FilterConstants.TYPE_NUMBER)
+            if(objField instanceof String){
+                objField = parseDateValue(objField)
+            }
+        }
+        else if(filter.type?.toLowerCase() == FilterConstants.TYPE_NUMBER) {
             value = Double.valueOf(value)
-
+            if(objField instanceof String){
+                objField = Double.valueOf(objField)
+            }
+        }
         switch (filter.operator) {
-            case FilterConstants.OPERATOR_EQUAL: return row[filter.field.toLowerCase()] == value
-            case FilterConstants.OPERATOR_GREATER_THAN: return row[filter.field.toLowerCase()] > value
-            case FilterConstants.OPERATOR_GREATER_THAN_OR_EQUAL: return row[filter.field.toLowerCase()] >= value
-            case FilterConstants.OPERATOR_LESS_THAN: return row[filter.field.toLowerCase()] < value
-            case FilterConstants.OPERATOR_LESS_THAN_OR_EQUAL: return row[filter.field.toLowerCase()] <= value
-            case FilterConstants.OPERATOR_NOT_EQUAL: return row[filter.field.toLowerCase()] != value
+            case FilterConstants.OPERATOR_EQUAL: return objField == value
+            case FilterConstants.OPERATOR_GREATER_THAN: return objField > value
+            case FilterConstants.OPERATOR_GREATER_THAN_OR_EQUAL: return objField >= value
+            case FilterConstants.OPERATOR_LESS_THAN: return objField < value
+            case FilterConstants.OPERATOR_LESS_THAN_OR_EQUAL: return objField <= value
+            case FilterConstants.OPERATOR_NOT_EQUAL: return objField != value
         }
     }
 
