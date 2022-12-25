@@ -3,17 +3,13 @@ package com.trevorism.gcloud
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
-import com.trevorism.gcloud.webapi.model.aggregating.Aggregation
-import com.trevorism.gcloud.webapi.model.aggregating.AggregationConstants
-import com.trevorism.gcloud.webapi.model.aggregating.AggregationFunction
 import com.trevorism.gcloud.webapi.model.filtering.ComplexFilter
 import com.trevorism.gcloud.webapi.model.filtering.SimpleFilter
 import com.trevorism.https.DefaultSecureHttpClient
 import com.trevorism.https.SecureHttpClient
 
 import java.time.Instant
-import java.time.ZoneOffset
-import java.time.temporal.ChronoUnit
+
 
 /**
  * @author tbrooks

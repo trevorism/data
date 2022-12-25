@@ -3,6 +3,7 @@ package com.trevorism.gcloud.webapi.service.lookup
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.trevorism.gcloud.webapi.model.SingleDatasourceRequest
+import com.trevorism.gcloud.webapi.model.exception.InvalidLookupException
 import com.trevorism.https.DefaultSecureHttpClient
 import com.trevorism.https.SecureHttpClient
 
@@ -17,7 +18,7 @@ class DatastoreLookupService implements LookupService{
         def parts = request.lookup.split(":")
 
         if(!parts || parts.size() < 2)
-            throw new LookupException("Unable to lookup dataset from: $request.lookup")
+            throw new InvalidLookupException("Unable to lookup dataset from: $request.lookup")
 
         String kind = parts[1]
 

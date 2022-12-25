@@ -1,5 +1,6 @@
 package com.trevorism.gcloud.webapi.service.filter
 
+import com.trevorism.gcloud.webapi.model.exception.UnparseableDateException
 import com.trevorism.gcloud.webapi.model.filtering.ComplexFilter
 import com.trevorism.gcloud.webapi.model.filtering.FilterConstants
 import com.trevorism.gcloud.webapi.model.filtering.SimpleFilter
@@ -97,6 +98,7 @@ class InMemoryFilterService implements FilterService{
         try{
             return Date.from(ZonedDateTime.parse(value).toInstant())
         }catch(ignored){}
-        throw new RuntimeException("Unparseable date: ${value}")
+
+        throw new UnparseableDateException("Unparseable date: ${value}")
     }
 }
