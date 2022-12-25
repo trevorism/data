@@ -1,5 +1,6 @@
 package com.trevorism.gcloud.webapi.service.lookup
 
+import com.trevorism.gcloud.webapi.model.exception.InvalidLookupException
 import com.trevorism.gcloud.webapi.model.searching.Search
 import com.trevorism.https.SecureHttpClient
 import org.junit.Test
@@ -17,7 +18,7 @@ class DatastoreLookupServiceTest {
 
     }
 
-    @Test(expected = LookupException)
+    @Test(expected = InvalidLookupException)
     void testInvalidLookup(){
         DatastoreLookupService service = new DatastoreLookupService()
         service.client = [get:{'[{"id":4}]'}] as SecureHttpClient
