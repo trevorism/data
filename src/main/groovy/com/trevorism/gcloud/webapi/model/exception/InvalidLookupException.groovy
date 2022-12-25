@@ -4,12 +4,8 @@ import javax.ws.rs.WebApplicationException
 
 class InvalidLookupException extends WebApplicationException {
 
-    InvalidLookupException(final String message, final Throwable cause, final int status){
-        super(message, cause, status)
-    }
-
     InvalidLookupException(final String message){
-        super(message)
+        super(message, 400)
     }
 
     InvalidLookupException(final String message, final Throwable cause){

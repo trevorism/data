@@ -34,5 +34,5 @@ Then(/objects are found/) {  ->
 }
 
 Then(/an error is returned/) {  ->
-    assert json.contains("failed")
+    assert json.contains("Error")
 }

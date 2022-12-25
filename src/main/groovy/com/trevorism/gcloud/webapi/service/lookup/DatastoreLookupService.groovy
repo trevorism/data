@@ -15,7 +15,7 @@ class DatastoreLookupService implements LookupService{
 
     @Override
     List<Map<String, Object>> lookupDataset(SingleDatasourceRequest request) {
-        def parts = request.lookup.split(":")
+        def parts = request.lookup?.split(":")
 
         if(!parts || parts.size() < 2)
             throw new InvalidLookupException("Unable to lookup dataset from: $request.lookup")

@@ -4,12 +4,8 @@ import javax.ws.rs.WebApplicationException
 
 class UnparseableDateException extends WebApplicationException {
 
-    UnparseableDateException(final String message, final Throwable cause, final int status){
-        super(message, cause, status)
-    }
-
     UnparseableDateException(final String message){
-        super(message)
+        super(message, 400)
     }
 
     UnparseableDateException(final String message, final Throwable cause){

@@ -23,6 +23,12 @@ class DatastoreLookupServiceTest {
         DatastoreLookupService service = new DatastoreLookupService()
         service.client = [get:{'[{"id":4}]'}] as SecureHttpClient
         service.lookupDataset(new Search(lookup: "blah"))
+    }
 
+    @Test(expected = InvalidLookupException)
+    void testInvalidLookupNull(){
+        DatastoreLookupService service = new DatastoreLookupService()
+        service.client = [get:{'[{"id":4}]'}] as SecureHttpClient
+        service.lookupDataset(new Search(lookup: ""))
     }
 }
