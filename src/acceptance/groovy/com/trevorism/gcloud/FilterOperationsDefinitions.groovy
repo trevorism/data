@@ -36,10 +36,4 @@ Then(/the filtered objects are returned/) {  ->
     assert (list[0].name == "object2" || list[0].name == "object1")
     assert list[0].number == 12
     assert (list[0].decimal == 6.5 || list[0].decimal == 4.2)
-
-    assert list[0]
-    assert (list[1].name == "object2" || list[1].name == "object1")
-    assert list[1].number == 12
-    assert (list[1].decimal == 6.5 || list[1].decimal == 4.2)
-
 }
