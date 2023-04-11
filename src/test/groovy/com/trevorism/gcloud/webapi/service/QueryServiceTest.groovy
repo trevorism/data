@@ -1,14 +1,14 @@
 package com.trevorism.gcloud.webapi.service
 
-import com.trevorism.gcloud.webapi.model.Query
-import com.trevorism.gcloud.webapi.model.aggregating.Aggregation
-import com.trevorism.gcloud.webapi.model.filtering.ComplexFilter
-import com.trevorism.gcloud.webapi.model.filtering.FilterConstants
-import com.trevorism.gcloud.webapi.model.filtering.SimpleFilter
-import com.trevorism.gcloud.webapi.model.searching.Search
-import com.trevorism.gcloud.webapi.service.lookup.LookupService
-import com.trevorism.gcloud.webapi.service.query.InMemoryQueryService
-import org.junit.Test
+import com.trevorism.data.model.Query
+import com.trevorism.data.model.aggregating.Aggregation
+import com.trevorism.data.model.filtering.ComplexFilter
+import com.trevorism.data.model.filtering.FilterConstants
+import com.trevorism.data.model.filtering.SimpleFilter
+import com.trevorism.data.model.searching.Search
+import com.trevorism.data.service.lookup.LookupService
+import com.trevorism.data.service.query.InMemoryQueryService
+import org.junit.jupiter.api.Test
 
 class QueryServiceTest {
 

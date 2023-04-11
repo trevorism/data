@@ -12,8 +12,8 @@ import java.time.Instant
  * @author tbrooks
  */
 
-this.metaClass.mixin(cucumber.api.groovy.Hooks)
-this.metaClass.mixin(cucumber.api.groovy.EN)
+this.metaClass.mixin(io.cucumber.groovy.Hooks)
+this.metaClass.mixin(io.cucumber.groovy.EN)
 
 SecureHttpClient secureHttpClient = new DefaultSecureHttpClient()
 Arbitrary dataObject1
@@ -22,8 +22,8 @@ List list = []
 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").create()
 
 Given(/two sample objects are created/) {  ->
-    def obj1 = new Arbitrary(name: "object1", date: Instant.now().toDate(), decimal: 4.2, number: 12)
-    def obj2 = new Arbitrary(name: "object2", date: Instant.now().minusSeconds(60).toDate(), decimal: 6.5, number: 12)
+    def obj1 = new Arbitrary(name: "object1", date: Date.from(Instant.now()), decimal: 4.2, number: 12)
+    def obj2 = new Arbitrary(name: "object2", date: Date.from(Instant.now().minusSeconds(60)), decimal: 6.5, number: 12)
 
     String json1 = secureHttpClient.post("https://data.trevorism.com/object/arbitrary", gson.toJson(obj1))
     String json2 = secureHttpClient.post("https://data.trevorism.com/object/arbitrary", gson.toJson(obj2))

@@ -1,7 +1,8 @@
 package com.trevorism.gcloud.webapi.controller
 
+import com.trevorism.data.controller.ObjectController
 import com.trevorism.https.SecureHttpClient
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class ObjectControllerTest {
 

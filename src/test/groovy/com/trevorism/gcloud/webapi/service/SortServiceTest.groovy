@@ -1,10 +1,10 @@
 package com.trevorism.gcloud.webapi.service
 
-import com.trevorism.gcloud.webapi.model.sorting.ComplexSort
-import com.trevorism.gcloud.webapi.model.sorting.Sort
-import com.trevorism.gcloud.webapi.service.lookup.LookupService
-import com.trevorism.gcloud.webapi.service.sort.InMemorySortService
-import org.junit.Test
+import com.trevorism.data.model.sorting.ComplexSort
+import com.trevorism.data.model.sorting.Sort
+import com.trevorism.data.service.lookup.LookupService
+import com.trevorism.data.service.sort.InMemorySortService
+import org.junit.jupiter.api.Test
 
 class SortServiceTest {
 

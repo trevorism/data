@@ -1,11 +1,11 @@
 package com.trevorism.gcloud.webapi.service
 
-import com.trevorism.gcloud.webapi.model.filtering.ComplexFilter
-import com.trevorism.gcloud.webapi.model.filtering.FilterConstants
-import com.trevorism.gcloud.webapi.model.filtering.SimpleFilter
-import com.trevorism.gcloud.webapi.service.filter.InMemoryFilterService
-import com.trevorism.gcloud.webapi.service.lookup.LookupService
-import org.junit.Test
+import com.trevorism.data.model.filtering.ComplexFilter
+import com.trevorism.data.model.filtering.FilterConstants
+import com.trevorism.data.model.filtering.SimpleFilter
+import com.trevorism.data.service.filter.InMemoryFilterService
+import com.trevorism.data.service.lookup.LookupService
+import org.junit.jupiter.api.Test
 
 import java.time.Instant
 import java.time.ZoneOffset

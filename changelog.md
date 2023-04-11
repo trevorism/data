@@ -1,3 +1,7 @@
+# 0.3.0
+
+Move to micronaut, java 17
+
 # 0.2.1
 
 Improve filtering by datetime to allow both local and zoned date times. Improved error handling.

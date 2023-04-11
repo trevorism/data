@@ -1,9 +1,9 @@
 package com.trevorism.gcloud.webapi.service
 
-import com.trevorism.gcloud.webapi.model.searching.Search
-import com.trevorism.gcloud.webapi.service.lookup.LookupService
-import com.trevorism.gcloud.webapi.service.search.InMemorySearchService
-import org.junit.Test
+import com.trevorism.data.model.searching.Search
+import com.trevorism.data.service.lookup.LookupService
+import com.trevorism.data.service.search.InMemorySearchService
+import org.junit.jupiter.api.Test
 
 import java.time.Instant
 import java.time.temporal.ChronoUnit

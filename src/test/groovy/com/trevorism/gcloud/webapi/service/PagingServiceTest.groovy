@@ -1,9 +1,9 @@
 package com.trevorism.gcloud.webapi.service
 
-import com.trevorism.gcloud.webapi.model.paging.Page
-import com.trevorism.gcloud.webapi.service.lookup.LookupService
-import com.trevorism.gcloud.webapi.service.paging.InMemoryPagingService
-import org.junit.Test
+import com.trevorism.data.model.paging.Page
+import com.trevorism.data.service.lookup.LookupService
+import com.trevorism.data.service.paging.InMemoryPagingService
+import org.junit.jupiter.api.Test
 
 class PagingServiceTest {
 

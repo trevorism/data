@@ -3,7 +3,7 @@ package com.trevorism.gcloud
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
-import com.trevorism.gcloud.webapi.model.searching.Search
+import com.trevorism.data.model.searching.Search
 import com.trevorism.https.DefaultSecureHttpClient
 import com.trevorism.https.SecureHttpClient
 
@@ -11,8 +11,8 @@ import com.trevorism.https.SecureHttpClient
  * @author tbrooks
  */
 
-this.metaClass.mixin(cucumber.api.groovy.Hooks)
-this.metaClass.mixin(cucumber.api.groovy.EN)
+this.metaClass.mixin(io.cucumber.groovy.Hooks)
+this.metaClass.mixin(io.cucumber.groovy.EN)
 
 SecureHttpClient secureHttpClient = new DefaultSecureHttpClient()
 List list = []

@@ -1,11 +1,11 @@
 package com.trevorism.gcloud.webapi.service
 
-import com.trevorism.gcloud.webapi.model.aggregating.Aggregation
-import com.trevorism.gcloud.webapi.model.aggregating.AggregationConstants
-import com.trevorism.gcloud.webapi.model.aggregating.AggregationFunction
-import com.trevorism.gcloud.webapi.service.aggregate.InMemoryAggregationService
-import com.trevorism.gcloud.webapi.service.lookup.LookupService
-import org.junit.Test
+import com.trevorism.data.model.aggregating.Aggregation
+import com.trevorism.data.model.aggregating.AggregationConstants
+import com.trevorism.data.model.aggregating.AggregationFunction
+import com.trevorism.data.service.aggregate.InMemoryAggregationService
+import com.trevorism.data.service.lookup.LookupService
+import org.junit.jupiter.api.Test
 
 class AggregationServiceTest {
 

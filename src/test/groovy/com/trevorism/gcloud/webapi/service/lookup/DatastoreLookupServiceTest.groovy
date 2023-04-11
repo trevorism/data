@@ -1,9 +1,12 @@
 package com.trevorism.gcloud.webapi.service.lookup
 
-import com.trevorism.gcloud.webapi.model.exception.InvalidLookupException
-import com.trevorism.gcloud.webapi.model.searching.Search
+import com.trevorism.data.model.exception.InvalidLookupException
+import com.trevorism.data.model.searching.Search
+import com.trevorism.data.service.lookup.DatastoreLookupService
 import com.trevorism.https.SecureHttpClient
-import org.junit.Test
+import org.junit.jupiter.api.Test
+
+import static org.junit.jupiter.api.Assertions.assertThrows
 
 class DatastoreLookupServiceTest {
 
@@ -18,17 +21,18 @@ class DatastoreLookupServiceTest {
 
     }
 
-    @Test(expected = InvalidLookupException)
+    @Test
     void testInvalidLookup(){
         DatastoreLookupService service = new DatastoreLookupService()
         service.client = [get:{'[{"id":4}]'}] as SecureHttpClient
-        service.lookupDataset(new Search(lookup: "blah"))
+        assertThrows(InvalidLookupException, () -> service.lookupDataset(new Search(lookup: "blah")))
     }
 
-    @Test(expected = InvalidLookupException)
+    @Test
     void testInvalidLookupNull(){
         DatastoreLookupService service = new DatastoreLookupService()
         service.client = [get:{'[{"id":4}]'}] as SecureHttpClient
-        service.lookupDataset(new Search(lookup: ""))
+        assertThrows(InvalidLookupException, () -> service.lookupDataset(new Search(lookup: "")))
+
     }
 }
