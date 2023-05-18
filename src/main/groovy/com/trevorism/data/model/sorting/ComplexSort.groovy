@@ -1,6 +1,8 @@
 package com.trevorism.data.model.sorting
 
-class ComplexSort extends com.trevorism.data.model.SingleDatasourceRequest{
+import com.trevorism.data.model.SingleDatasourceRequest
+
+class ComplexSort extends SingleDatasourceRequest{
     List<Sort> sorts = []
 
 }

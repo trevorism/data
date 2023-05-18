@@ -19,20 +19,21 @@ class DescribeController {
     private DescribeService service = new InMemoryDescribeService()
 
     @Tag(name = "Describe Operations")
-    @Operation(summary = "Perform a data operation and get a result **Secure")
+    @Operation(summary = "Perform a describe data operation")
     @Post(value = "/", produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
     def operate(@Body Describe query) {
         service.describe(null)
     }
 
     @Tag(name = "Describe Operations")
-    @Operation(summary = "Get results of a saved data operation **Secure")
+    @Operation(summary = "Get a description of the performable data actions")
     @Get(value = "{id}", produces = MediaType.APPLICATION_JSON)
     def operateById(String id) {
         service.describe(null)
     }
 
-    @Operation(summary = "Get results of a saved data operation **Secure")
+    @Tag(name = "Describe Operations")
+    @Operation(summary = "Get a description of the performable data actions")
     @Get(value = "/", produces = MediaType.APPLICATION_JSON)
     def describe() {
         service.describe(null)
