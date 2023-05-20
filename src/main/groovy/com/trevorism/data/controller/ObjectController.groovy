@@ -1,10 +1,12 @@
 package com.trevorism.data.controller
 
 import com.google.gson.Gson
+import com.trevorism.data.provider.PassThruSecureHttpClient
 import com.trevorism.https.DefaultSecureHttpClient
 import com.trevorism.https.SecureHttpClient
 import com.trevorism.secure.Roles
 import com.trevorism.secure.Secure
+import io.micronaut.http.HttpStatus
 import io.micronaut.http.MediaType
 import io.micronaut.http.annotation.*
 import io.swagger.v3.oas.annotations.Operation
@@ -17,9 +19,13 @@ import org.slf4j.LoggerFactory
 class ObjectController {
 
     private static final Logger log = LoggerFactory.getLogger(ObjectController.class.name)
-    private SecureHttpClient httpClient = new DefaultSecureHttpClient()
-    private static final String baseUrl = "https://datastore.trevorism.com/api"
+    private SecureHttpClient httpClient
+    private static final String baseUrl = "https://datastore.data.trevorism.com/object"
     private Gson gson = new Gson()
+
+    ObjectController(SecureHttpClient passThruSecureHttpClient) {
+        this.httpClient = passThruSecureHttpClient
+    }
 
     @Tag(name = "Object Operations")
     @Operation(summary = "Get an object of type {kind} with id {id}")
@@ -39,6 +45,7 @@ class ObjectController {
 
     @Tag(name = "Object Operations")
     @Operation(summary = "Create an object of type {kind} **Secure")
+    @Status(HttpStatus.CREATED)
     @Post(value = "{kind}", produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
     @Secure(value = Roles.SYSTEM, allowInternal = true)
     def create(String kind, @Body Map<String, Object> data) {

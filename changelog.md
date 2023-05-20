@@ -1,3 +1,8 @@
+# 0.4.0
+
+Update datastore API URL and use latest dependencies, which log correlation id and 
+inject the user credentials into each datastore request.
+
 # 0.3.0
 
 Move to micronaut, java 17
