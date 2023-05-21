@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder
 import com.trevorism.data.model.aggregating.Aggregation
 import com.trevorism.data.model.aggregating.AggregationConstants
 import com.trevorism.data.model.aggregating.AggregationFunction
-import com.trevorism.https.DefaultSecureHttpClient
+import com.trevorism.https.AppClientSecureHttpClient
 import com.trevorism.https.SecureHttpClient
 
 /**
@@ -15,7 +15,7 @@ import com.trevorism.https.SecureHttpClient
 this.metaClass.mixin(io.cucumber.groovy.Hooks)
 this.metaClass.mixin(io.cucumber.groovy.EN)
 
-SecureHttpClient secureHttpClient = new DefaultSecureHttpClient()
+SecureHttpClient secureHttpClient = new AppClientSecureHttpClient()
 List list = []
 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").create()
 

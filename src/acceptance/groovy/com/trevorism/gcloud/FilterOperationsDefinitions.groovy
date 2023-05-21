@@ -5,11 +5,10 @@ import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.trevorism.data.model.filtering.ComplexFilter
 import com.trevorism.data.model.filtering.SimpleFilter
-import com.trevorism.https.DefaultSecureHttpClient
+import com.trevorism.https.AppClientSecureHttpClient
 import com.trevorism.https.SecureHttpClient
 
 import java.time.Instant
-
 
 /**
  * @author tbrooks
@@ -18,7 +17,7 @@ import java.time.Instant
 this.metaClass.mixin(io.cucumber.groovy.Hooks)
 this.metaClass.mixin(io.cucumber.groovy.EN)
 
-SecureHttpClient secureHttpClient = new DefaultSecureHttpClient()
+SecureHttpClient secureHttpClient = new AppClientSecureHttpClient()
 List list = []
 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").create()
 
@@ -30,7 +29,7 @@ When(/a filter request with date before {int} seconds from now is requested/) { 
     list = gson.fromJson(jsonList, new TypeToken<List<Arbitrary>>() {}.getType())
 }
 
-Then(/the filtered objects are returned/) {  ->
+Then(/the filtered objects are returned/) { ->
     assert list
     assert list[0]
     assert (list[0].name == "object2" || list[0].name == "object1")

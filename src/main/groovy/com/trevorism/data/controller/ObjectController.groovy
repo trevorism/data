@@ -1,8 +1,6 @@
 package com.trevorism.data.controller
 
 import com.google.gson.Gson
-import com.trevorism.data.provider.PassThruSecureHttpClient
-import com.trevorism.https.DefaultSecureHttpClient
 import com.trevorism.https.SecureHttpClient
 import com.trevorism.secure.Roles
 import com.trevorism.secure.Secure

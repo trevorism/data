@@ -1,5 +1,7 @@
 package com.trevorism.data.provider
 
+import com.trevorism.http.HeadersHttpResponse
+import com.trevorism.https.SecureHttpClient
 import com.trevorism.https.token.ObtainTokenFromParameter
 import io.micronaut.http.HttpRequest
 import io.micronaut.runtime.http.scope.RequestAware
@@ -11,7 +13,13 @@ class PassThruObtainTokenStrategy extends ObtainTokenFromParameter implements Re
     @Override
     void setRequest(HttpRequest<?> request) {
         String authValue = request.getHeaders().get("Authorization")
-        String tokenValue = authValue.substring("Bearer ".length())
-        setToken(tokenValue)
+
+        if(authValue == null) {
+            setToken("")
+        }
+        else{
+            String tokenValue = authValue.substring(SecureHttpClient.BEARER_.length())
+            setToken(tokenValue)
+        }
     }
 }
