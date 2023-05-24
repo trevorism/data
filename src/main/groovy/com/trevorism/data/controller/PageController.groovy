@@ -29,7 +29,7 @@ class PageController {
     @Tag(name = "Page Operations")
     @Operation(summary = "Perform a data operation and get a result **Secure")
     @Post(value = "/", produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
-    @Secure(value = Roles.SYSTEM, allowInternal = true)
+    @Secure(value = Roles.USER, allowInternal = true)
     def operate(@Body Page paging) {
         pagingService.page(paging)
     }
@@ -37,7 +37,7 @@ class PageController {
     @Tag(name = "Page Operations")
     @Operation(summary = "Get results of a saved data operation **Secure")
     @Get(value = "{id}", produces = MediaType.APPLICATION_JSON)
-    @Secure(value = Roles.SYSTEM, allowInternal = true)
+    @Secure(value = Roles.USER, allowInternal = true)
     def operateById(String id) {
         Page paging = DataUtils.getById(id, Page)
         operate(paging)

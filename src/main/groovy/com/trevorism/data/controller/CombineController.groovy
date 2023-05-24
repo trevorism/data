@@ -19,7 +19,7 @@ class CombineController {
     @Tag(name = "Combine Operations")
     @Operation(summary = "Perform a data operation and get a result **Secure")
     @Post(value = "/join", produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
-    @Secure(value = Roles.SYSTEM, allowInternal = true)
+    @Secure(value = Roles.USER, allowInternal = true)
     def join(@Body Join join) {
 
     }
@@ -27,7 +27,7 @@ class CombineController {
     @Tag(name = "Combine Operations")
     @Operation(summary = "Perform a data operation and get a result **Secure")
     @Post(value = "/intersection", produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
-    @Secure(value = Roles.SYSTEM, allowInternal = true)
+    @Secure(value = Roles.USER, allowInternal = true)
     def intersect(@Body SetOperation intersection) {
 
     }
@@ -35,14 +35,14 @@ class CombineController {
     @Tag(name = "Combine Operations")
     @Operation(summary = "Perform a data operation and get a result **Secure")
     @Post(value = "/union", produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
-    @Secure(value = Roles.SYSTEM, allowInternal = true)
+    @Secure(value = Roles.USER, allowInternal = true)
     def union(@Body SetOperation union) {
 
     }
 
     @Operation(summary = "Get results of a saved data operation **Secure")
     @Get(value = "{id}", produces = MediaType.APPLICATION_JSON)
-    @Secure(value = Roles.SYSTEM, allowInternal = true)
+    @Secure(value = Roles.USER, allowInternal = true)
     def operateById(String id) {
 
     }

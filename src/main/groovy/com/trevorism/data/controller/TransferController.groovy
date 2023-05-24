@@ -19,7 +19,7 @@ class TransferController {
     @Tag(name = "Transfer Operations")
     @Operation(summary = "Perform a data operation and get a result **Secure")
     @Post(value = "/", produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
-    @Secure(value = Roles.SYSTEM, allowInternal = true)
+    @Secure(value = Roles.USER, allowInternal = true)
     def operate(@Body Transfer transfer) {
 
     }
@@ -27,7 +27,7 @@ class TransferController {
     @Tag(name = "Transfer Operations")
     @Operation(summary = "Get results of a saved data operation **Secure")
     @Get(value = "{id}", produces = MediaType.APPLICATION_JSON)
-    @Secure(value = Roles.SYSTEM, allowInternal = true)
+    @Secure(value = Roles.USER, allowInternal = true)
     def operateById(String id) {
 
     }

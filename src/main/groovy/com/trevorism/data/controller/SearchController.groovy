@@ -29,7 +29,7 @@ class SearchController {
     @Tag(name = "Search Operations")
     @Operation(summary = "Perform a data operation and get a result **Secure")
     @Post(value = "/", produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
-    @Secure(value = Roles.SYSTEM, allowInternal = true)
+    @Secure(value = Roles.USER, allowInternal = true)
     def operate(@Body Search query) {
         searchService.search(query)
     }
@@ -37,7 +37,7 @@ class SearchController {
     @Tag(name = "Search Operations")
     @Operation(summary = "Get results of a saved data operation **Secure")
     @Get(value = "{id}", produces = MediaType.APPLICATION_JSON)
-    @Secure(value = Roles.SYSTEM, allowInternal = true)
+    @Secure(value = Roles.USER, allowInternal = true)
     def operateById(String id) {
         def query = DataUtils.getById(id, Search)
         operate(query)

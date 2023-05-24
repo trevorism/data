@@ -30,7 +30,7 @@ class FilterController {
     @Tag(name = "Filter Operations")
     @Operation(summary = "Perform a data operation and get a result **Secure")
     @Post(value = "/", produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
-    @Secure(value = Roles.SYSTEM, allowInternal = true)
+    @Secure(value = Roles.USER, allowInternal = true)
     def operate(@Body ComplexFilter filter) {
         filterService.filter(filter)
     }
@@ -38,7 +38,7 @@ class FilterController {
     @Tag(name = "Filter Operations")
     @Operation(summary = "Get results of a saved data operation **Secure")
     @Get(value = "{id}", produces = MediaType.APPLICATION_JSON)
-    @Secure(value = Roles.SYSTEM, allowInternal = true)
+    @Secure(value = Roles.USER, allowInternal = true)
     def operateById(String id) {
         def complexFilter = DataUtils.getById(id, ComplexFilter)
         operate(complexFilter)

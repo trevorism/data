@@ -28,7 +28,7 @@ class ObjectController {
     @Tag(name = "Object Operations")
     @Operation(summary = "Get an object of type {kind} with id {id}")
     @Get(value = "{kind}/{id}", produces = MediaType.APPLICATION_JSON)
-    @Secure(value = Roles.SYSTEM, allowInternal = true)
+    @Secure(value = Roles.USER, allowInternal = true)
     def read(String kind, String id) {
         return httpClient.get("$DATASTORE_OBJECT_BASE_URL/$kind/$id")
     }
@@ -36,7 +36,7 @@ class ObjectController {
     @Tag(name = "Object Operations")
     @Operation(summary = "Get all objects of type {kind}")
     @Get(value = "{kind}", produces = MediaType.APPLICATION_JSON)
-    @Secure(value = Roles.SYSTEM, allowInternal = true)
+    @Secure(value = Roles.USER, allowInternal = true)
     def readAll(String kind) {
         httpClient.get("$DATASTORE_OBJECT_BASE_URL/$kind")
     }
@@ -45,7 +45,7 @@ class ObjectController {
     @Operation(summary = "Create an object of type {kind} **Secure")
     @Status(HttpStatus.CREATED)
     @Post(value = "{kind}", produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
-    @Secure(value = Roles.SYSTEM, allowInternal = true)
+    @Secure(value = Roles.USER, allowInternal = true)
     def create(String kind, @Body Map<String, Object> data) {
         try {
             return httpClient.post("$DATASTORE_OBJECT_BASE_URL/$kind", DataUtils.gson.toJson(data))
@@ -58,7 +58,7 @@ class ObjectController {
     @Tag(name = "Object Operations")
     @Operation(summary = "Update an object of type {kind} with id {id} **Secure")
     @Put(value = "{kind}/{id}", produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
-    @Secure(value = Roles.SYSTEM, allowInternal = true)
+    @Secure(value = Roles.USER, allowInternal = true)
     def update(String kind, long id, @Body Map<String, Object> data) {
         try {
             return httpClient.put("$DATASTORE_OBJECT_BASE_URL/$kind/$id", DataUtils.gson.toJson(data))
@@ -71,7 +71,7 @@ class ObjectController {
     @Tag(name = "Object Operations")
     @Operation(summary = "Delete an object of type {kind} with id {id} **Secure")
     @Delete(value = "{kind}/{id}", produces = MediaType.APPLICATION_JSON)
-    @Secure(value = Roles.SYSTEM, allowInternal = true)
+    @Secure(value = Roles.USER, allowInternal = true)
     def delete(String kind, long id) {
         return httpClient.delete("$DATASTORE_OBJECT_BASE_URL/$kind/$id")
     }
