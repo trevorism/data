@@ -1,31 +1,40 @@
 package com.trevorism.data.service.request
 
+import com.trevorism.data.model.aggregating.Aggregation
+import com.trevorism.data.model.combining.Join
+import com.trevorism.data.model.combining.SetOperation
+import com.trevorism.data.model.filtering.ComplexFilter
+import com.trevorism.data.model.paging.Page
+import com.trevorism.data.model.searching.Search
+import com.trevorism.data.model.sorting.ComplexSort
+import com.trevorism.data.model.transferring.Transfer
+
 class OperationRequestFactory {
 
     def buildRequestObject(Map<String, Object> request) {
 
-        try { return (com.trevorism.data.model.aggregating.Aggregation)request }
+        try { return (Aggregation)request }
         catch (Exception ignored) { }
 
-        try { return (com.trevorism.data.model.filtering.ComplexFilter)request}
+        try { return (ComplexFilter)request}
         catch (Exception ignored) { }
 
-        try { return (com.trevorism.data.model.paging.Page)request}
+        try { return (Page)request}
         catch (Exception ignored) { }
 
-        try { return (com.trevorism.data.model.searching.Search)request}
+        try { return (Search)request}
         catch (Exception ignored) { }
 
-        try { return (com.trevorism.data.model.sorting.ComplexSort)request}
+        try { return (ComplexSort)request}
         catch (Exception ignored) { }
 
-        try { return (com.trevorism.data.model.transferring.Transfer)request}
+        try { return (Transfer)request}
         catch (Exception ignored) { }
 
-        try { return (com.trevorism.data.model.combining.SetOperation)request}
+        try { return (SetOperation)request}
         catch (Exception ignored) { }
 
-        try { return (com.trevorism.data.model.combining.Join)request}
+        try { return (Join)request}
         catch (Exception ignored) { }
 
         throw new RuntimeException("Unable to parse request into known data operation")

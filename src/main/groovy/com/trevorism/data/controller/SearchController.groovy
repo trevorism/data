@@ -3,7 +3,9 @@ package com.trevorism.data.controller
 import com.trevorism.data.DataUtils
 import com.trevorism.data.model.searching.Search
 import com.trevorism.data.service.SearchService
+import com.trevorism.data.service.query.InMemoryQueryService
 import com.trevorism.data.service.search.InMemorySearchService
+import com.trevorism.https.SecureHttpClient
 import com.trevorism.secure.Roles
 import com.trevorism.secure.Secure
 import io.micronaut.http.MediaType
@@ -18,8 +20,11 @@ import io.swagger.v3.oas.annotations.tags.Tag
 @Controller("/search")
 class SearchController {
 
-    private SearchService searchService = new InMemorySearchService()
+    private SearchService searchService
 
+    SearchController(SecureHttpClient passThruSecureHttpClient) {
+        searchService = new InMemorySearchService(passThruSecureHttpClient)
+    }
 
     @Tag(name = "Search Operations")
     @Operation(summary = "Perform a data operation and get a result **Secure")

@@ -3,7 +3,9 @@ package com.trevorism.data.controller
 import com.trevorism.data.DataUtils
 import com.trevorism.data.model.sorting.ComplexSort
 import com.trevorism.data.service.SortService
+import com.trevorism.data.service.search.InMemorySearchService
 import com.trevorism.data.service.sort.InMemorySortService
+import com.trevorism.https.SecureHttpClient
 import com.trevorism.secure.Roles
 import com.trevorism.secure.Secure
 import io.micronaut.http.MediaType
@@ -18,7 +20,11 @@ import io.swagger.v3.oas.annotations.tags.Tag
 @Controller("/sort")
 class SortController {
 
-    private SortService sortService = new InMemorySortService()
+    private SortService sortService
+
+    SortController(SecureHttpClient passThruSecureHttpClient) {
+        sortService = new InMemorySortService(passThruSecureHttpClient)
+    }
 
 
     @Tag(name = "Sort Operations")
