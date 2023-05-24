@@ -4,10 +4,11 @@ package com.trevorism.data.service.sort
 import com.trevorism.data.model.sorting.ComplexSort
 import com.trevorism.data.service.SortService
 import com.trevorism.data.service.lookup.DatastoreLookupService
+import com.trevorism.data.service.lookup.LookupService
 
 class InMemorySortService implements SortService{
 
-    private com.trevorism.data.service.lookup.LookupService lookupService = new DatastoreLookupService()
+    private LookupService lookupService = new DatastoreLookupService()
 
     @Override
     def sort(ComplexSort request) {

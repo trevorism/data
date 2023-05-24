@@ -1,4 +1,4 @@
-package com.trevorism.data.provider
+package com.trevorism.data.bean
 
 import io.micronaut.http.HttpRequest
 import io.micronaut.runtime.http.scope.RequestAware

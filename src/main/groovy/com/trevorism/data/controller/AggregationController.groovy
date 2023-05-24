@@ -1,11 +1,10 @@
 package com.trevorism.data.controller
 
-
-import com.trevorism.data.PingingDatastoreRepository
-import com.trevorism.data.Repository
+import com.trevorism.data.DataUtils
 import com.trevorism.data.model.aggregating.Aggregation
 import com.trevorism.data.service.AggregationService
 import com.trevorism.data.service.aggregate.InMemoryAggregationService
+import com.trevorism.https.SecureHttpClient
 import com.trevorism.secure.Roles
 import com.trevorism.secure.Secure
 import io.micronaut.http.MediaType
@@ -20,8 +19,13 @@ import io.swagger.v3.oas.annotations.tags.Tag
 @Controller("/aggregation")
 class AggregationController {
 
-    private AggregationService service = new InMemoryAggregationService()
-    private Repository<Aggregation> repo = new PingingDatastoreRepository<>(Aggregation)
+    private AggregationService service
+    private SecureHttpClient httpClient
+
+    AggregationController(SecureHttpClient passThruSecureHttpClient) {
+        this.httpClient = passThruSecureHttpClient
+        this.service = new InMemoryAggregationService(httpClient)
+    }
 
     @Tag(name = "Aggregation Operations")
     @Operation(summary = "Perform a data operation and get a result **Secure")
@@ -36,7 +40,7 @@ class AggregationController {
     @Get(value = "{id}", produces = MediaType.APPLICATION_JSON)
     @Secure(value = Roles.SYSTEM, allowInternal = true)
     def operateById(String id) {
-        def aggregation = repo.get(id)
+        def aggregation = DataUtils.getById(id, Aggregation)
         operate(aggregation)
     }
 }

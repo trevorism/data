@@ -4,10 +4,15 @@ import com.trevorism.data.model.paging.Page
 import com.trevorism.data.service.PagingService
 import com.trevorism.data.service.lookup.DatastoreLookupService
 import com.trevorism.data.service.lookup.LookupService
+import com.trevorism.https.SecureHttpClient
 
 class InMemoryPagingService implements PagingService{
 
-    private LookupService lookupService = new DatastoreLookupService()
+    private LookupService lookupService
+
+    InMemoryPagingService(SecureHttpClient passThruSecureHttpClient){
+        lookupService = new DatastoreLookupService(passThruSecureHttpClient)
+    }
 
     @Override
     def page(Page pagingRequest) {

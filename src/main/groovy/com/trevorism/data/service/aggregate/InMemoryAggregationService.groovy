@@ -6,10 +6,15 @@ import com.trevorism.data.model.aggregating.AggregationFunction
 import com.trevorism.data.service.AggregationService
 import com.trevorism.data.service.lookup.DatastoreLookupService
 import com.trevorism.data.service.lookup.LookupService
+import com.trevorism.https.SecureHttpClient
 
 class InMemoryAggregationService implements AggregationService{
 
-    private LookupService lookupService = new DatastoreLookupService()
+    private LookupService lookupService
+
+    InMemoryAggregationService(SecureHttpClient httpClient)  {
+        this.lookupService = new DatastoreLookupService(httpClient)
+    }
 
     @Override
     def aggregate(Aggregation request) {
@@ -37,7 +42,7 @@ class InMemoryAggregationService implements AggregationService{
 
     }
 
-    private def computeAggregationValue(AggregationFunction it, List<Map<String, Object>> v) {
+    private static def computeAggregationValue(AggregationFunction it, List<Map<String, Object>> v) {
         switch (it.functionName) {
             case AggregationConstants.FIRST: return v.first()[it.field]
             case AggregationConstants.COUNT: return v.size()

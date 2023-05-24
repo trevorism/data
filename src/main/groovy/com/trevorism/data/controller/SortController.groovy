@@ -1,8 +1,6 @@
 package com.trevorism.data.controller
 
-
-import com.trevorism.data.PingingDatastoreRepository
-import com.trevorism.data.Repository
+import com.trevorism.data.DataUtils
 import com.trevorism.data.model.sorting.ComplexSort
 import com.trevorism.data.service.SortService
 import com.trevorism.data.service.sort.InMemorySortService
@@ -21,7 +19,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 class SortController {
 
     private SortService sortService = new InMemorySortService()
-    private Repository<ComplexSort> repo = new PingingDatastoreRepository<>(ComplexSort)
+
 
     @Tag(name = "Sort Operations")
     @Operation(summary = "Perform a data operation and get a result **Secure")
@@ -36,7 +34,7 @@ class SortController {
     @Get(value = "{id}", produces = MediaType.APPLICATION_JSON)
     @Secure(value = Roles.SYSTEM, allowInternal = true)
     def operateById(String id) {
-        ComplexSort complexSort = repo.get(id)
+        ComplexSort complexSort = DataUtils.getById(id, ComplexSort)
         operate(complexSort)
     }
 }

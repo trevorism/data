@@ -1,8 +1,6 @@
 package com.trevorism.data.controller
 
-
-import com.trevorism.data.PingingDatastoreRepository
-import com.trevorism.data.Repository
+import com.trevorism.data.DataUtils
 import com.trevorism.data.model.Query
 import com.trevorism.data.service.QueryService
 import com.trevorism.data.service.query.InMemoryQueryService
@@ -21,7 +19,6 @@ import io.swagger.v3.oas.annotations.tags.Tag
 class QueryController {
 
     private QueryService queryService = new InMemoryQueryService()
-    private Repository<Query> repo = new PingingDatastoreRepository<>(Query)
 
     @Tag(name = "Query Operations")
     @Operation(summary = "Perform a data operation and get a result **Secure")
@@ -36,7 +33,7 @@ class QueryController {
     @Get(value = "{id}", produces = MediaType.APPLICATION_JSON)
     @Secure(value = Roles.SYSTEM, allowInternal = true)
     def operateById(String id) {
-        def query = repo.get(id)
+        def query = DataUtils.getById(id, Query)
         operate(query)
     }
 }

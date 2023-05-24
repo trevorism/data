@@ -1,10 +1,10 @@
 package com.trevorism.data.controller
 
-import com.trevorism.data.PingingDatastoreRepository
-import com.trevorism.data.Repository
+import com.trevorism.data.DataUtils
 import com.trevorism.data.model.paging.Page
 import com.trevorism.data.service.PagingService
 import com.trevorism.data.service.paging.InMemoryPagingService
+import com.trevorism.https.SecureHttpClient
 import com.trevorism.secure.Roles
 import com.trevorism.secure.Secure
 import io.micronaut.http.MediaType
@@ -18,8 +18,13 @@ import io.swagger.v3.oas.annotations.tags.Tag
 @Controller("/page")
 class PageController {
 
-    private PagingService pagingService = new InMemoryPagingService()
-    private Repository<Page> repo = new PingingDatastoreRepository<>(Page)
+    private PagingService pagingService
+    private SecureHttpClient httpClient
+
+    PageController(SecureHttpClient passThruSecureHttpClient) {
+        this.httpClient = passThruSecureHttpClient
+        this.pagingService = new InMemoryPagingService(httpClient)
+    }
 
     @Tag(name = "Page Operations")
     @Operation(summary = "Perform a data operation and get a result **Secure")
@@ -34,7 +39,7 @@ class PageController {
     @Get(value = "{id}", produces = MediaType.APPLICATION_JSON)
     @Secure(value = Roles.SYSTEM, allowInternal = true)
     def operateById(String id) {
-        Page paging = repo.get(id)
+        Page paging = DataUtils.getById(id, Page)
         operate(paging)
     }
 }

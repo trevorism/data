@@ -1,4 +1,4 @@
-package com.trevorism.data.provider
+package com.trevorism.data.bean
 
 import com.trevorism.https.SecureHttpClient
 import com.trevorism.https.SecureHttpClientBase

@@ -1,6 +1,7 @@
 package com.trevorism.data.controller
 
-import com.google.gson.Gson
+
+import com.trevorism.data.DataUtils
 import com.trevorism.https.SecureHttpClient
 import com.trevorism.secure.Roles
 import com.trevorism.secure.Secure
@@ -18,8 +19,7 @@ class ObjectController {
 
     private static final Logger log = LoggerFactory.getLogger(ObjectController.class.name)
     private SecureHttpClient httpClient
-    private static final String baseUrl = "https://datastore.data.trevorism.com/object"
-    private Gson gson = new Gson()
+    private static final String DATASTORE_OBJECT_BASE_URL = DataUtils.DATASTORE_BASE_URL + "/object"
 
     ObjectController(SecureHttpClient passThruSecureHttpClient) {
         this.httpClient = passThruSecureHttpClient
@@ -30,7 +30,7 @@ class ObjectController {
     @Get(value = "{kind}/{id}", produces = MediaType.APPLICATION_JSON)
     @Secure(value = Roles.SYSTEM, allowInternal = true)
     def read(String kind, String id) {
-        return httpClient.get("$baseUrl/$kind/$id")
+        return httpClient.get("$DATASTORE_OBJECT_BASE_URL/$kind/$id")
     }
 
     @Tag(name = "Object Operations")
@@ -38,7 +38,7 @@ class ObjectController {
     @Get(value = "{kind}", produces = MediaType.APPLICATION_JSON)
     @Secure(value = Roles.SYSTEM, allowInternal = true)
     def readAll(String kind) {
-        httpClient.get("$baseUrl/$kind")
+        httpClient.get("$DATASTORE_OBJECT_BASE_URL/$kind")
     }
 
     @Tag(name = "Object Operations")
@@ -48,7 +48,7 @@ class ObjectController {
     @Secure(value = Roles.SYSTEM, allowInternal = true)
     def create(String kind, @Body Map<String, Object> data) {
         try {
-            return httpClient.post("$baseUrl/$kind", gson.toJson(data))
+            return httpClient.post("$DATASTORE_OBJECT_BASE_URL/$kind", DataUtils.gson.toJson(data))
         } catch (Exception e) {
             log.error("Unable to create ${kind} object: ${data} :: ${e.getMessage()}", e)
             throw new HttpResponseException(400, e.message)
@@ -61,7 +61,7 @@ class ObjectController {
     @Secure(value = Roles.SYSTEM, allowInternal = true)
     def update(String kind, long id, @Body Map<String, Object> data) {
         try {
-            return httpClient.put("$baseUrl/$kind/$id", gson.toJson(data))
+            return httpClient.put("$DATASTORE_OBJECT_BASE_URL/$kind/$id", DataUtils.gson.toJson(data))
         } catch (Exception e) {
             log.error("Unable to create ${kind} object: ${data} :: ${e.getMessage()}")
             throw new HttpResponseException(400, e.message)
@@ -73,6 +73,6 @@ class ObjectController {
     @Delete(value = "{kind}/{id}", produces = MediaType.APPLICATION_JSON)
     @Secure(value = Roles.SYSTEM, allowInternal = true)
     def delete(String kind, long id) {
-        return httpClient.delete("$baseUrl/$kind/$id")
+        return httpClient.delete("$DATASTORE_OBJECT_BASE_URL/$kind/$id")
     }
 }

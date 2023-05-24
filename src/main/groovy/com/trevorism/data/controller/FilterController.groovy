@@ -1,11 +1,10 @@
 package com.trevorism.data.controller
 
-
-import com.trevorism.data.PingingDatastoreRepository
-import com.trevorism.data.Repository
+import com.trevorism.data.DataUtils
 import com.trevorism.data.model.filtering.ComplexFilter
 import com.trevorism.data.service.FilterService
 import com.trevorism.data.service.filter.InMemoryFilterService
+import com.trevorism.https.SecureHttpClient
 import com.trevorism.secure.Roles
 import com.trevorism.secure.Secure
 import io.micronaut.http.MediaType
@@ -20,8 +19,13 @@ import io.swagger.v3.oas.annotations.tags.Tag
 @Controller("/filter")
 class FilterController {
 
-    private FilterService filterService = new InMemoryFilterService()
-    private Repository<ComplexFilter> repo = new PingingDatastoreRepository<>(ComplexFilter)
+    private FilterService filterService
+    private SecureHttpClient httpClient
+
+    FilterController(SecureHttpClient passThruSecureHttpClient) {
+        this.httpClient = passThruSecureHttpClient
+        this.filterService = new InMemoryFilterService(httpClient)
+    }
 
     @Tag(name = "Filter Operations")
     @Operation(summary = "Perform a data operation and get a result **Secure")
@@ -36,7 +40,7 @@ class FilterController {
     @Get(value = "{id}", produces = MediaType.APPLICATION_JSON)
     @Secure(value = Roles.SYSTEM, allowInternal = true)
     def operateById(String id) {
-        def complexFilter = repo.get(id)
+        def complexFilter = DataUtils.getById(id, ComplexFilter)
         operate(complexFilter)
     }
 }

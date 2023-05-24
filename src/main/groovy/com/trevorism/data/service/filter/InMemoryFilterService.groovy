@@ -7,6 +7,7 @@ import com.trevorism.data.model.filtering.SimpleFilter
 import com.trevorism.data.service.FilterService
 import com.trevorism.data.service.lookup.DatastoreLookupService
 import com.trevorism.data.service.lookup.LookupService
+import com.trevorism.https.SecureHttpClient
 
 import java.time.LocalDateTime
 import java.time.ZoneOffset
@@ -14,7 +15,11 @@ import java.time.ZonedDateTime
 
 class InMemoryFilterService implements FilterService{
 
-    private LookupService lookupService = new DatastoreLookupService()
+    private LookupService lookupService
+
+    InMemoryFilterService(SecureHttpClient passThruSecureHttpClient){
+        this.lookupService = new DatastoreLookupService(passThruSecureHttpClient)
+    }
 
     @Override
     def filter(ComplexFilter request) {
