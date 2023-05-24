@@ -5,10 +5,15 @@ import com.trevorism.data.model.sorting.ComplexSort
 import com.trevorism.data.service.SortService
 import com.trevorism.data.service.lookup.DatastoreLookupService
 import com.trevorism.data.service.lookup.LookupService
+import com.trevorism.https.SecureHttpClient
 
 class InMemorySortService implements SortService{
 
-    private LookupService lookupService = new DatastoreLookupService()
+    private LookupService lookupService
+
+    InMemorySortService(SecureHttpClient passThruSecureHttpClient){
+        lookupService = new DatastoreLookupService(passThruSecureHttpClient)
+    }
 
     @Override
     def sort(ComplexSort request) {
