@@ -3,6 +3,7 @@ Feature: Sort objects
 
   Scenario: Sort test objects by name descending
     Given the application is alive
+    And the data is cleared
     And two sample objects are created
     When a list of sorted sample objects are requested by name descending
     Then two sample objects are found in order
