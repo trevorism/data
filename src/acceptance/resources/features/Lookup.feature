@@ -11,5 +11,5 @@ Feature: Data Catalog lookups
 
   Scenario:
     Given the application is alive
-    When a single data source request is invoked with a valid invalid locator
+    When a single data source request is invoked with an invalid locator
     Then an error is returned
