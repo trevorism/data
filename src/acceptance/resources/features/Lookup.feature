@@ -3,6 +3,7 @@ Feature: Data Catalog lookups
 
   Scenario:
     Given the application is alive
+    And the data is cleared
     And two sample objects are created
     When a single data source request is invoked with a valid lookup locator
     Then objects are found

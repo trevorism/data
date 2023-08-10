@@ -54,6 +54,13 @@ Then(/two sample objects are found/) {  ->
 
 }
 
+Given(/the data is cleared/) {  ->
+    String listJson = secureHttpClient.get("https://data.trevorism.com/object/arbitrary")
+    gson.fromJson(listJson, new TypeToken<List<Arbitrary>>(){}.getType()).each{ Arbitrary obj ->
+        secureHttpClient.delete("https://data.trevorism.com/object/arbitrary/${obj.id}")
+    }
+}
+
 Then(/the two sample objects can be deleted/) {  ->
     String listJson = secureHttpClient.get("https://data.trevorism.com/object/arbitrary")
     gson.fromJson(listJson, new TypeToken<List<Arbitrary>>(){}.getType()).each{ Arbitrary obj ->
