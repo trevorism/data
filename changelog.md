@@ -1,3 +1,7 @@
+# 0.5.0
+
+Update micronaut and other dependencies
+
 # 0.4.0
 
 Update datastore API URL and use latest dependencies, which log correlation id and 
