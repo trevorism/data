@@ -40,6 +40,7 @@ class CombineController {
 
     }
 
+    @Tag(name = "Combine Operations")
     @Operation(summary = "Get results of a saved data operation **Secure")
     @Get(value = "{id}", produces = MediaType.APPLICATION_JSON)
     @Secure(value = Roles.USER, allowInternal = true)
