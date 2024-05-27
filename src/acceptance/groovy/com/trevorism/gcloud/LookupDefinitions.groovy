@@ -24,7 +24,7 @@ When(/a single data source request is invoked with a valid lookup locator/) {  -
     list = gson.fromJson(jsonList, new TypeToken<List<Arbitrary>>() {}.getType())
 }
 
-When(/a single data source request is invoked with a valid invalid locator/) {  ->
+When(/a single data source request is invoked with an invalid locator/) {  ->
     Page page = new Page(lookup: "arbitrary", pageSize: 10, page: 1)
     try{
         secureHttpClient.post("https://data.trevorism.com/page", gson.toJson(page))

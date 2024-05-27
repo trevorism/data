@@ -5,4 +5,3 @@ Feature: Context Root of this API
     Given the application is alive
     When I navigate to "https://data.trevorism.com"
     Then then a link to the help page is displayed
-
