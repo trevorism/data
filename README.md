@@ -4,7 +4,7 @@
 ![GitHub language count](https://img.shields.io/github/languages/count/trevorism/data)
 ![GitHub top language](https://img.shields.io/github/languages/top/trevorism/data)
 
-Current version: 0.5.0
+Current version: 0.5.1
 
 Deployed to [Trevorism Data](https://data.trevorism.com)
 

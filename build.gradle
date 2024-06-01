@@ -17,7 +17,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.google.cloud.tools:appengine-gradle-plugin:2.8.0'
-        classpath 'com.trevorism:gradle-acceptance-plugin:2.3.1'
+        classpath 'com.trevorism:gradle-acceptance-plugin:2.7.2'
     }
 }
 
@@ -57,9 +57,13 @@ dependencies {
 
     runtimeOnly("ch.qos.logback:logback-classic")
 
-    implementation 'com.trevorism:micronaut-utility-beans:1.3.0'
+    implementation ('com.trevorism:micronaut-utility-beans:1.3.0'){
+        exclude module:"slf4j-nop"
+        exclude module:"slf4j-simple"
+    }
     implementation 'com.google.code.gson:gson:2.11.0'
 
+    testImplementation 'com.trevorism:test-result-events:0.3.0'
     acceptanceImplementation 'io.cucumber:cucumber-groovy:6.10.4'
     acceptanceImplementation 'com.trevorism:secure-http-utils:3.1.0'
     acceptanceImplementation 'com.google.code.gson:gson:2.11.0'
@@ -85,11 +89,27 @@ tasks.withType(GroovyCompile) {
 }
 
 appengine {
-    stage.artifact = "${buildDir}/libs/${project.name}-all.jar"
+    stage.artifact = layout.buildDirectory.file("libs/${project.name}-all.jar")
     deploy {
         projectId = "trevorism-data"
-        version = "0-5-0"
+        version = "0-5-1"
         stopPreviousVersion = true
         promote = true
     }
 }
+
+test {
+    systemProperty("trevorism.test.event", findProperty("trevorism.test.event") == "enabled" ? project.name : null)
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.6
+            }
+        }
+    }
+}
+
+build.dependsOn jacocoTestCoverageVerification

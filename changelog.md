@@ -1,3 +1,7 @@
+# 0.5.1
+
+Add test and deploy events.
+
 # 0.5.0
 
 Update micronaut and other dependencies
