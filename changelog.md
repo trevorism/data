@@ -1,3 +1,7 @@
+# 0.6.0
+
+Call bigquery API for bigquery datasets.
+
 # 0.5.1
 
 Add test and deploy events.

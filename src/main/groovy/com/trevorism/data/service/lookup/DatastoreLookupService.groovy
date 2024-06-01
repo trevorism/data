@@ -11,6 +11,7 @@ class DatastoreLookupService implements LookupService {
     private SecureHttpClient client
     private Gson gson = (new GsonBuilder()).setDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").create()
     private final static String DATASTORE_BASE_URL = "https://datastore.data.trevorism.com/object"
+    private final static String BIGQUERY_BASE_URL = "https://bigquery.data.trevorism.com/object"
 
     DatastoreLookupService(SecureHttpClient client) {
         this.client = client
@@ -23,9 +24,14 @@ class DatastoreLookupService implements LookupService {
         if (!parts || parts.size() < 2)
             throw new InvalidLookupException("Unable to lookup dataset from: $request.lookup")
 
+        String datasource = parts[0]
         String kind = parts[1]
 
-        String json = client.get("$DATASTORE_BASE_URL/$kind")
+        String url = "$DATASTORE_BASE_URL/$kind"
+        if (datasource == "bigquery")
+            url = "$BIGQUERY_BASE_URL/$kind"
+
+        String json = client.get(url)
         return gson.fromJson(json, List)
     }
 }
