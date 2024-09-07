@@ -5,6 +5,9 @@ import com.google.gson.GsonBuilder
 
 class DataUtils {
     static final String DATASTORE_BASE_URL = "https://datastore.data.trevorism.com"
+    static final String BIGQUERY_BASE_URL = "https://bigquery.data.trevorism.com"
+    static final String MEMORY_BASE_URL = "https://memory.data.trevorism.com"
+
     static final Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").create()
 
     static def getById(String id, Class clazz) {

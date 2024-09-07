@@ -1,3 +1,8 @@
+# 0.7.0
+
+Update dependencies and support data locator for memory and bigquery. 
+Update object controller with an optional query parameter to operate on different data sources.
+
 # 0.6.0
 
 Call bigquery API for bigquery datasets.

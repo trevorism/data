@@ -1,6 +1,5 @@
 package com.trevorism.data.controller
 
-
 import com.trevorism.data.model.transferring.Transfer
 import com.trevorism.secure.Roles
 import com.trevorism.secure.Secure

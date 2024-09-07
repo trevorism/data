@@ -3,7 +3,6 @@ package com.trevorism.data.controller
 import com.trevorism.data.DataUtils
 import com.trevorism.data.model.sorting.ComplexSort
 import com.trevorism.data.service.SortService
-import com.trevorism.data.service.search.InMemorySearchService
 import com.trevorism.data.service.sort.InMemorySortService
 import com.trevorism.https.SecureHttpClient
 import com.trevorism.secure.Roles
@@ -25,7 +24,6 @@ class SortController {
     SortController(SecureHttpClient passThruSecureHttpClient) {
         sortService = new InMemorySortService(passThruSecureHttpClient)
     }
-
 
     @Tag(name = "Sort Operations")
     @Operation(summary = "Perform a data operation and get a result **Secure")

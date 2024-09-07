@@ -3,7 +3,6 @@ package com.trevorism.data.controller
 import com.trevorism.data.DataUtils
 import com.trevorism.data.model.searching.Search
 import com.trevorism.data.service.SearchService
-import com.trevorism.data.service.query.InMemoryQueryService
 import com.trevorism.data.service.search.InMemorySearchService
 import com.trevorism.https.SecureHttpClient
 import com.trevorism.secure.Roles

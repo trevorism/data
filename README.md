@@ -4,15 +4,13 @@
 ![GitHub language count](https://img.shields.io/github/languages/count/trevorism/data)
 ![GitHub top language](https://img.shields.io/github/languages/top/trevorism/data)
 
-Current version: 0.6.0
-
 Deployed to [Trevorism Data](https://data.trevorism.com)
 
 Creates a high-level interface for data operations for Trevorism Data. The full list of operations can be found [here](https://data.trevorism.com/describe).
 
 Introduces the concept of a data locator of the form <repository>:<path_to_data> which allows all operations to find a dataset.
 
-Operations are classified into two types, Single Datastore and Multi Datastore. A Query interface chains all single datastore operations into a single interface.
+Operations are classified into two types, Single Datastore and Multi Datastore. A Query interface chains all single datastore operations into a unified interface.
 
 Here's an example:
 
