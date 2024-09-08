@@ -19,7 +19,7 @@ class ObjectController {
     private static final Logger log = LoggerFactory.getLogger(ObjectController.class.name)
     private SecureHttpClient httpClient
 
-    private static final String DATASTORE_OBJECT_BASE_URL = DataUtils.DATASTORE_BASE_URL + "/object"
+    private static final String DATASTORE_OBJECT_BASE_URL = "${DataUtils.DATASTORE_BASE_URL}/object"
     private static final String BIGQUERY_OBJECT_BASE_URL = "${DataUtils.BIGQUERY_BASE_URL}/object"
     private static final String MEMORY_OBJECT_BASE_URL = "${DataUtils.MEMORY_BASE_URL}/object"
 
@@ -73,7 +73,7 @@ class ObjectController {
     @Operation(summary = "Update an object of type {kind} with id {id} **Secure")
     @Put(value = "{kind}/{id}", produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
     @Secure(value = Roles.USER, allowInternal = true)
-    def update(String kind, long id, @Body Map<String, Object> data, @QueryValue Optional<String> datasource) {
+    def update(String kind, String id, @Body Map<String, Object> data, @QueryValue Optional<String> datasource) {
         try {
             String baseUrl = getBaseUrl(datasource.orElse(null))
             return httpClient.put("$baseUrl/$kind/$id", DataUtils.gson.toJson(data))
@@ -87,7 +87,7 @@ class ObjectController {
     @Operation(summary = "Delete an object of type {kind} with id {id} **Secure")
     @Delete(value = "{kind}/{id}", produces = MediaType.APPLICATION_JSON)
     @Secure(value = Roles.USER, allowInternal = true)
-    def delete(String kind, long id, @QueryValue Optional<String> datasource) {
+    def delete(String kind, String id, @QueryValue Optional<String> datasource) {
         String baseUrl = getBaseUrl(datasource.orElse(null))
         return httpClient.delete("$baseUrl/$kind/$id")
     }

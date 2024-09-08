@@ -27,12 +27,12 @@ class ObjectControllerTest {
     @Test
     void testUpdate() {
         ObjectController oc = new ObjectController([put: { url, obj -> return "{\"id\":\"12341\",\"name\":\"testName\"}"}] as SecureHttpClient)
-        assert oc.update("testpushbutton",12341,[id:12341,name:"testName"], Optional.empty())
+        assert oc.update("testpushbutton","12341",[id:12341,name:"testName"], Optional.empty())
     }
 
     @Test
     void testDelete() {
         ObjectController oc = new ObjectController([delete: { url -> return "{\"id\":\"12341\",\"name\":\"testName\"}"}] as SecureHttpClient)
-        assert oc.delete("testpushbutton", 6318495402819584, Optional.empty())
+        assert oc.delete("testpushbutton", "6318495402819584", Optional.empty())
     }
 }
