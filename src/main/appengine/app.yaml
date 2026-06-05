@@ -1,5 +1,9 @@
 runtime: java25
 entrypoint: java -jar data-all.jar
+
+env_variables:
+  OTEL_SDK_DISABLED: "true"
+
 handlers:
   - url: /.*
     secure: always
