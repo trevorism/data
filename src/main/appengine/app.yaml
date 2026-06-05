@@ -1,7 +1,6 @@
 runtime: java25
 entrypoint: java -jar data-all.jar
-env_variables:
-  OTEL_METRICS_EXPORTER: "none"
+
 handlers:
   - url: /.*
     secure: always
