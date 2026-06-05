@@ -1,9 +1,10 @@
+# 0.9.0
+
+Upgraded dependencies, resolving a problem with trace monitoring failing.
+
 # 0.8.0
 
 Upgrade to Micronaut 5.0.0, Java 25, Gradle 9.x wrapper, and latest platform dependencies.
-Updated shadow plugin to com.gradleup.shadow 9.4.1, App Engine plugin to 2.8.7,
-gradle-acceptance-plugin to 2.8.2, reactor-core to 3.8.5, gson to 2.14.0,
-and micronaut-utility-beans to 1.7.2.
 
 # 0.7.0
 

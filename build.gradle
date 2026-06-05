@@ -1,5 +1,5 @@
 buildscript {
-    ext{
+    ext {
         creds = {
             username = findProperty("github.user") ?: System.getenv("GITHUB_ACTOR")
             password = findProperty("github.token") ?: System.getenv("GITHUB_TOKEN")
@@ -51,13 +51,13 @@ dependencies {
     implementation 'io.projectreactor:reactor-core:3.8.5'
 
     implementation("io.swagger.core.v3:swagger-annotations")
-    compileOnly("io.micronaut.openapi:micronaut-openapi"){
-        exclude module:"slf4j-nop"
+    compileOnly("io.micronaut.openapi:micronaut-openapi") {
+        exclude module: "slf4j-nop"
     }
 
-    runtimeOnly("ch.qos.logback:logback-classic")
+    implementation("ch.qos.logback:logback-classic")
 
-    implementation ('com.trevorism:micronaut-utility-beans:1.7.2')
+    implementation('com.trevorism:micronaut-utility-beans:1.8.0')
     implementation 'com.google.code.gson:gson:2.14.0'
 
     testImplementation 'com.trevorism:test-result-events:0.3.0'
@@ -89,7 +89,7 @@ appengine {
     stage.artifact = layout.buildDirectory.file("libs/${project.name}-all.jar")
     deploy {
         projectId = "trevorism-data"
-        version = "0-8-0"
+        version = "0-9-0"
         stopPreviousVersion = true
         promote = true
     }
