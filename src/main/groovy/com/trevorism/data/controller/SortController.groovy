@@ -20,8 +20,10 @@ import io.swagger.v3.oas.annotations.tags.Tag
 class SortController {
 
     private SortService sortService
+    private SecureHttpClient httpClient
 
     SortController(SecureHttpClient passThruSecureHttpClient) {
+        this.httpClient = passThruSecureHttpClient
         sortService = new InMemorySortService(passThruSecureHttpClient)
     }
 
@@ -38,7 +40,7 @@ class SortController {
     @Get(value = "{id}", produces = MediaType.APPLICATION_JSON)
     @Secure(value = Roles.USER, allowInternal = true)
     def operateById(String id) {
-        ComplexSort complexSort = DataUtils.getById(id, ComplexSort)
+        ComplexSort complexSort = DataUtils.getById(httpClient, id, ComplexSort)
         operate(complexSort)
     }
 }

@@ -39,7 +39,7 @@ class PageController {
     @Get(value = "{id}", produces = MediaType.APPLICATION_JSON)
     @Secure(value = Roles.USER, allowInternal = true)
     def operateById(String id) {
-        Page paging = DataUtils.getById(id, Page)
+        Page paging = DataUtils.getById(httpClient, id, Page)
         operate(paging)
     }
 }

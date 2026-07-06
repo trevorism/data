@@ -2,6 +2,7 @@ package com.trevorism.data
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.trevorism.https.SecureHttpClient
 
 class DataUtils {
     static final String DATASTORE_BASE_URL = "https://datastore.data.trevorism.com"
@@ -10,7 +11,8 @@ class DataUtils {
 
     static final Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").create()
 
-    static def getById(String id, Class clazz) {
-        return gson.fromJson("${DATASTORE_BASE_URL}/object/${clazz.simpleName}/${id}", clazz)
+    static def getById(SecureHttpClient httpClient, String id, Class clazz) {
+        String json = httpClient.get("${DATASTORE_BASE_URL}/object/${clazz.simpleName}/${id}")
+        return gson.fromJson(json, clazz)
     }
 }

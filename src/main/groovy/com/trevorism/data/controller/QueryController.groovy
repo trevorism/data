@@ -20,8 +20,10 @@ import io.swagger.v3.oas.annotations.tags.Tag
 class QueryController {
 
     private QueryService queryService
+    private SecureHttpClient httpClient
 
     QueryController(SecureHttpClient passThruSecureHttpClient) {
+        this.httpClient = passThruSecureHttpClient
         queryService = new InMemoryQueryService(passThruSecureHttpClient)
     }
 
@@ -38,7 +40,7 @@ class QueryController {
     @Get(value = "{id}", produces = MediaType.APPLICATION_JSON)
     @Secure(value = Roles.USER, allowInternal = true)
     def operateById(String id) {
-        def query = DataUtils.getById(id, Query)
+        def query = DataUtils.getById(httpClient, id, Query)
         operate(query)
     }
 }

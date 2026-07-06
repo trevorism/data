@@ -20,8 +20,10 @@ import io.swagger.v3.oas.annotations.tags.Tag
 class SearchController {
 
     private SearchService searchService
+    private SecureHttpClient httpClient
 
     SearchController(SecureHttpClient passThruSecureHttpClient) {
+        this.httpClient = passThruSecureHttpClient
         searchService = new InMemorySearchService(passThruSecureHttpClient)
     }
 
@@ -38,7 +40,7 @@ class SearchController {
     @Get(value = "{id}", produces = MediaType.APPLICATION_JSON)
     @Secure(value = Roles.USER, allowInternal = true)
     def operateById(String id) {
-        def query = DataUtils.getById(id, Search)
+        def query = DataUtils.getById(httpClient, id, Search)
         operate(query)
     }
 }

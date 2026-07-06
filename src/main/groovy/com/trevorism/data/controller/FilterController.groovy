@@ -40,7 +40,7 @@ class FilterController {
     @Get(value = "{id}", produces = MediaType.APPLICATION_JSON)
     @Secure(value = Roles.USER, allowInternal = true)
     def operateById(String id) {
-        def complexFilter = DataUtils.getById(id, ComplexFilter)
+        def complexFilter = DataUtils.getById(httpClient, id, ComplexFilter)
         operate(complexFilter)
     }
 }

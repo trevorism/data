@@ -40,7 +40,7 @@ class AggregationController {
     @Get(value = "{id}", produces = MediaType.APPLICATION_JSON)
     @Secure(value = Roles.USER, allowInternal = true)
     def operateById(String id) {
-        def aggregation = DataUtils.getById(id, Aggregation)
+        def aggregation = DataUtils.getById(httpClient, id, Aggregation)
         operate(aggregation)
     }
 }
