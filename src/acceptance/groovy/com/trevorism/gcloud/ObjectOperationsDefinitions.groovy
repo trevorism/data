@@ -15,6 +15,7 @@ import java.time.Instant
 this.metaClass.mixin(io.cucumber.groovy.Hooks)
 this.metaClass.mixin(io.cucumber.groovy.EN)
 
+String baseUrl = System.getenv("ACCEPTANCE_BASE_URL") ?: "https://data.trevorism.com"
 SecureHttpClient secureHttpClient = new AppClientSecureHttpClient()
 Arbitrary dataObject1
 Arbitrary dataObject2
@@ -25,15 +26,15 @@ Given(/two sample objects are created/) {  ->
     def obj1 = new Arbitrary(name: "object1", date: Date.from(Instant.now()), decimal: 4.2, number: 12)
     def obj2 = new Arbitrary(name: "object2", date: Date.from(Instant.now().minusSeconds(60)), decimal: 6.5, number: 12)
 
-    String json1 = secureHttpClient.post("https://data.trevorism.com/object/arbitrary", gson.toJson(obj1))
-    String json2 = secureHttpClient.post("https://data.trevorism.com/object/arbitrary", gson.toJson(obj2))
+    String json1 = secureHttpClient.post("${baseUrl}/object/arbitrary", gson.toJson(obj1))
+    String json2 = secureHttpClient.post("${baseUrl}/object/arbitrary", gson.toJson(obj2))
 
     dataObject1 = gson.fromJson(json1, Arbitrary)
     dataObject2 = gson.fromJson(json2, Arbitrary)
 }
 
 When(/a list of sample objects are requested/) {  ->
-    String jsonList = secureHttpClient.get("https://data.trevorism.com/object/arbitrary")
+    String jsonList = secureHttpClient.get("${baseUrl}/object/arbitrary")
     list = gson.fromJson(jsonList, new TypeToken<List<Arbitrary>>(){}.getType())
 }
 
@@ -55,18 +56,18 @@ Then(/two sample objects are found/) {  ->
 }
 
 Given(/the data is cleared/) {  ->
-    String listJson = secureHttpClient.get("https://data.trevorism.com/object/arbitrary")
+    String listJson = secureHttpClient.get("${baseUrl}/object/arbitrary")
     gson.fromJson(listJson, new TypeToken<List<Arbitrary>>(){}.getType()).each{ Arbitrary obj ->
-        secureHttpClient.delete("https://data.trevorism.com/object/arbitrary/${obj.id}")
+        secureHttpClient.delete("${baseUrl}/object/arbitrary/${obj.id}")
     }
 }
 
 Then(/the two sample objects can be deleted/) {  ->
-    String listJson = secureHttpClient.get("https://data.trevorism.com/object/arbitrary")
+    String listJson = secureHttpClient.get("${baseUrl}/object/arbitrary")
     gson.fromJson(listJson, new TypeToken<List<Arbitrary>>(){}.getType()).each{ Arbitrary obj ->
-        secureHttpClient.delete("https://data.trevorism.com/object/arbitrary/${obj.id}")
+        secureHttpClient.delete("${baseUrl}/object/arbitrary/${obj.id}")
     }
-    String jsonList = secureHttpClient.get("https://data.trevorism.com/object/arbitrary")
+    String jsonList = secureHttpClient.get("${baseUrl}/object/arbitrary")
     def result = gson.fromJson(jsonList, new TypeToken<List<Arbitrary>>(){}.getType())
     assert !(result)
 }
@@ -80,12 +81,12 @@ When(/the objects are updated/) {  ->
     dataObject2.number = 0
     dataObject2.date = null
 
-    secureHttpClient.put("https://data.trevorism.com/object/arbitrary/${dataObject1.id}", gson.toJson(dataObject1))
-    secureHttpClient.put("https://data.trevorism.com/object/arbitrary/${dataObject2.id}", gson.toJson(dataObject2))
+    secureHttpClient.put("${baseUrl}/object/arbitrary/${dataObject1.id}", gson.toJson(dataObject1))
+    secureHttpClient.put("${baseUrl}/object/arbitrary/${dataObject2.id}", gson.toJson(dataObject2))
 }
 
 Then(/the objects reflect the updates/) {  ->
-    String jsonList = secureHttpClient.get("https://data.trevorism.com/object/arbitrary")
+    String jsonList = secureHttpClient.get("${baseUrl}/object/arbitrary")
     def result = gson.fromJson(jsonList, new TypeToken<List<Arbitrary>>(){}.getType())
     Arbitrary obj1 = result.find{ it.id == dataObject1.id}
     assert obj1.name == "changed"

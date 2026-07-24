@@ -14,13 +14,14 @@ import com.trevorism.https.SecureHttpClient
 this.metaClass.mixin(io.cucumber.groovy.Hooks)
 this.metaClass.mixin(io.cucumber.groovy.EN)
 
+String baseUrl = System.getenv("ACCEPTANCE_BASE_URL") ?: "https://data.trevorism.com"
 SecureHttpClient secureHttpClient = new AppClientSecureHttpClient()
 List list = []
 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").create()
 
 When(/a search of {string} is requested/) { String string ->
     Search search = new Search(lookup: "datastore:arbitrary", query: string)
-    String jsonList = secureHttpClient.post("https://data.trevorism.com/search", gson.toJson(search))
+    String jsonList = secureHttpClient.post("${baseUrl}/search", gson.toJson(search))
     list = gson.fromJson(jsonList, new TypeToken<List<Arbitrary>>() {}.getType())
 }
 

@@ -15,13 +15,14 @@ import com.trevorism.https.SecureHttpClient
 this.metaClass.mixin(io.cucumber.groovy.Hooks)
 this.metaClass.mixin(io.cucumber.groovy.EN)
 
+String baseUrl = System.getenv("ACCEPTANCE_BASE_URL") ?: "https://data.trevorism.com"
 SecureHttpClient secureHttpClient = new AppClientSecureHttpClient()
 List list = []
 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").create()
 
 When(/an aggregation request of by number and sum of decimal field is requested/) {  ->
     Aggregation aggregation = new Aggregation(lookup: "datastore:arbitrary", groupBy: ["number"], functions: [new AggregationFunction(field: "decimal", functionName: AggregationConstants.SUM)])
-    String jsonList = secureHttpClient.post("https://data.trevorism.com/aggregation", gson.toJson(aggregation))
+    String jsonList = secureHttpClient.post("${baseUrl}/aggregation", gson.toJson(aggregation))
     list = gson.fromJson(jsonList, List)
 }
 
