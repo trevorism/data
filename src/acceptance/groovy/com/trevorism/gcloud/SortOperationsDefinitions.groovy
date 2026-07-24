@@ -15,13 +15,14 @@ import com.trevorism.https.SecureHttpClient
 this.metaClass.mixin(io.cucumber.groovy.Hooks)
 this.metaClass.mixin(io.cucumber.groovy.EN)
 
+String baseUrl = System.getenv("ACCEPTANCE_BASE_URL") ?: "https://data.trevorism.com"
 SecureHttpClient secureHttpClient = new AppClientSecureHttpClient()
 List list = []
 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").create()
 
 When(/a list of sorted sample objects are requested by name descending/) { ->
     ComplexSort sort = new ComplexSort(lookup: "datastore:arbitrary", sorts: [new Sort(field: "name", descending: true)])
-    String jsonList = secureHttpClient.post("https://data.trevorism.com/sort", gson.toJson(sort))
+    String jsonList = secureHttpClient.post("${baseUrl}/sort", gson.toJson(sort))
     list = gson.fromJson(jsonList, new TypeToken<List<Arbitrary>>() {}.getType())
 }
 

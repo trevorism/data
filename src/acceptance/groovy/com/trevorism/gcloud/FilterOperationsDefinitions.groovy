@@ -17,6 +17,7 @@ import java.time.Instant
 this.metaClass.mixin(io.cucumber.groovy.Hooks)
 this.metaClass.mixin(io.cucumber.groovy.EN)
 
+String baseUrl = System.getenv("ACCEPTANCE_BASE_URL") ?: "https://data.trevorism.com"
 SecureHttpClient secureHttpClient = new AppClientSecureHttpClient()
 List list = []
 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").create()
@@ -25,7 +26,7 @@ When(/a filter request with date before {int} seconds from now is requested/) { 
     String dateValue = Instant.now().minusSeconds(int1).toString()
     ComplexFilter filter = new ComplexFilter(lookup: "datastore:arbitrary", simpleFilters: [new SimpleFilter(field: "date", operator: "<", type: "date", value: dateValue)])
     String json = gson.toJson(filter)
-    String jsonList = secureHttpClient.post("https://data.trevorism.com/filter", json)
+    String jsonList = secureHttpClient.post("${baseUrl}/filter", json)
     list = gson.fromJson(jsonList, new TypeToken<List<Arbitrary>>() {}.getType())
 }
 

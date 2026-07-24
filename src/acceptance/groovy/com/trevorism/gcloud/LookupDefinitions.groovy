@@ -14,20 +14,21 @@ import com.trevorism.https.SecureHttpClient
 this.metaClass.mixin(io.cucumber.groovy.Hooks)
 this.metaClass.mixin(io.cucumber.groovy.EN)
 
+String baseUrl = System.getenv("ACCEPTANCE_BASE_URL") ?: "https://data.trevorism.com"
 SecureHttpClient secureHttpClient = new AppClientSecureHttpClient()
 String error
 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").create()
 
 When(/a single data source request is invoked with a valid lookup locator/) {  ->
     Page page = new Page(lookup: ":arbitrary", pageSize: 10, page: 1)
-    String jsonList = secureHttpClient.post("https://data.trevorism.com/page", gson.toJson(page))
+    String jsonList = secureHttpClient.post("${baseUrl}/page", gson.toJson(page))
     list = gson.fromJson(jsonList, new TypeToken<List<Arbitrary>>() {}.getType())
 }
 
 When(/a single data source request is invoked with an invalid locator/) {  ->
     Page page = new Page(lookup: "arbitrary", pageSize: 10, page: 1)
     try{
-        secureHttpClient.post("https://data.trevorism.com/page", gson.toJson(page))
+        secureHttpClient.post("${baseUrl}/page", gson.toJson(page))
     } catch(Exception e){
         error = e.message
     }
