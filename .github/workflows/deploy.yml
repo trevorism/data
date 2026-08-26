@@ -5,7 +5,10 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-    types: [ opened, synchronize, reopened, closed ]
+    types: [ opened, synchronize, reopened ]
+  pull_request_target:
+    branches: [ master ]
+    types: [ closed ]
   workflow_dispatch:
 
 permissions:
@@ -21,6 +24,5 @@ jobs:
     with:
       gcp_project: 'trevorism-data'
       gcp_project_id: '381816155418'
-      version: '0-9-0'
       service: 'default'
     secrets: inherit
