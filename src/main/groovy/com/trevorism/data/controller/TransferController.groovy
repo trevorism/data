@@ -1,6 +1,7 @@
 package com.trevorism.data.controller
 
 import com.trevorism.data.model.transferring.Transfer
+import com.trevorism.secure.Permissions
 import com.trevorism.secure.Roles
 import com.trevorism.secure.Secure
 import io.micronaut.http.MediaType
@@ -18,7 +19,7 @@ class TransferController {
     @Tag(name = "Transfer Operations")
     @Operation(summary = "Perform a data operation and get a result **Secure")
     @Post(value = "/", produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
-    @Secure(value = Roles.USER, allowInternal = true)
+    @Secure(value = Roles.USER, allowInternal = true, permissions = Permissions.EXECUTE)
     def operate(@Body Transfer transfer) {
 
     }
@@ -26,7 +27,7 @@ class TransferController {
     @Tag(name = "Transfer Operations")
     @Operation(summary = "Get results of a saved data operation **Secure")
     @Get(value = "{id}", produces = MediaType.APPLICATION_JSON)
-    @Secure(value = Roles.USER, allowInternal = true)
+    @Secure(value = Roles.USER, allowInternal = true, permissions = Permissions.EXECUTE)
     def operateById(String id) {
 
     }

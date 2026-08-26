@@ -2,6 +2,7 @@ package com.trevorism.data.controller
 
 import com.trevorism.data.DataUtils
 import com.trevorism.https.SecureHttpClient
+import com.trevorism.secure.Permissions
 import com.trevorism.secure.Roles
 import com.trevorism.secure.Secure
 import io.micronaut.http.HttpStatus
@@ -30,7 +31,7 @@ class ObjectController {
     @Tag(name = "Object Operations")
     @Operation(summary = "Get all objects types **Secure")
     @Get(value = "/", produces = MediaType.APPLICATION_JSON)
-    @Secure(value = Roles.USER, allowInternal = true)
+    @Secure(value = Roles.USER, allowInternal = true, permissions = Permissions.READ)
     def getTypes(@QueryValue Optional<String> datasource) {
         String baseUrl = getBaseUrl(datasource.orElse(null))
         return httpClient.get(baseUrl)
@@ -39,7 +40,7 @@ class ObjectController {
     @Tag(name = "Object Operations")
     @Operation(summary = "Get an object of type {kind} with id {id} **Secure")
     @Get(value = "{kind}/{id}", produces = MediaType.APPLICATION_JSON)
-    @Secure(value = Roles.USER, allowInternal = true)
+    @Secure(value = Roles.USER, allowInternal = true, permissions = Permissions.READ)
     def read(String kind, String id, @QueryValue Optional<String> datasource) {
         String baseUrl = getBaseUrl(datasource.orElse(null))
         return httpClient.get("$baseUrl/$kind/$id")
@@ -48,7 +49,7 @@ class ObjectController {
     @Tag(name = "Object Operations")
     @Operation(summary = "Get all objects of type {kind} **Secure")
     @Get(value = "{kind}", produces = MediaType.APPLICATION_JSON)
-    @Secure(value = Roles.USER, allowInternal = true)
+    @Secure(value = Roles.USER, allowInternal = true, permissions = Permissions.READ)
     def readAll(String kind, @QueryValue Optional<String> datasource) {
         String baseUrl = getBaseUrl(datasource.orElse(null))
         return httpClient.get("$baseUrl/$kind")
@@ -58,7 +59,7 @@ class ObjectController {
     @Operation(summary = "Create an object of type {kind} **Secure")
     @Status(HttpStatus.CREATED)
     @Post(value = "{kind}", produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
-    @Secure(value = Roles.USER, allowInternal = true)
+    @Secure(value = Roles.USER, allowInternal = true, permissions = Permissions.CREATE)
     def create(String kind, @Body Map<String, Object> data, @QueryValue Optional<String> datasource) {
         try {
             String baseUrl = getBaseUrl(datasource.orElse(null))
@@ -72,7 +73,7 @@ class ObjectController {
     @Tag(name = "Object Operations")
     @Operation(summary = "Update an object of type {kind} with id {id} **Secure")
     @Put(value = "{kind}/{id}", produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
-    @Secure(value = Roles.USER, allowInternal = true)
+    @Secure(value = Roles.USER, allowInternal = true, permissions = Permissions.UPDATE)
     def update(String kind, String id, @Body Map<String, Object> data, @QueryValue Optional<String> datasource) {
         try {
             String baseUrl = getBaseUrl(datasource.orElse(null))
@@ -86,7 +87,7 @@ class ObjectController {
     @Tag(name = "Object Operations")
     @Operation(summary = "Delete an object of type {kind} with id {id} **Secure")
     @Delete(value = "{kind}/{id}", produces = MediaType.APPLICATION_JSON)
-    @Secure(value = Roles.USER, allowInternal = true)
+    @Secure(value = Roles.USER, allowInternal = true, permissions = Permissions.DELETE)
     def delete(String kind, String id, @QueryValue Optional<String> datasource) {
         String baseUrl = getBaseUrl(datasource.orElse(null))
         return httpClient.delete("$baseUrl/$kind/$id")
