@@ -1,6 +1,7 @@
 package com.trevorism.data.service.query
 
 
+import com.trevorism.data.DataFields
 import com.trevorism.data.model.Query
 import com.trevorism.data.service.AggregationService
 import com.trevorism.data.service.FilterService
@@ -64,7 +65,7 @@ class InMemoryQueryService implements QueryService{
             dataset = dataset.collect { obj ->
                 def map = [:]
                 request.fields.each {
-                    map.put(it, obj[it])
+                    map.put(it, DataFields.valueOf(obj, it))
                 }
                 return map
             }

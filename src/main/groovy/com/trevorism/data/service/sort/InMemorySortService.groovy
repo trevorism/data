@@ -1,6 +1,7 @@
 package com.trevorism.data.service.sort
 
 
+import com.trevorism.data.DataFields
 import com.trevorism.data.model.sorting.ComplexSort
 import com.trevorism.data.service.SortService
 import com.trevorism.data.service.lookup.DatastoreLookupService
@@ -24,9 +25,9 @@ class InMemorySortService implements SortService{
 
         request.sorts.reverse().each {simpleSort ->
             if(simpleSort.descending)
-                dataset = dataset.sort{x1, x2 -> x2[simpleSort.field?.toLowerCase()] <=> x1[simpleSort.field?.toLowerCase()]}
+                dataset = dataset.sort{x1, x2 -> DataFields.compare(DataFields.valueOf(x2, simpleSort.field), DataFields.valueOf(x1, simpleSort.field))}
             else
-                dataset = dataset.sort{x1, x2 -> x1[simpleSort.field?.toLowerCase()] <=> x2[simpleSort.field?.toLowerCase()]}
+                dataset = dataset.sort{x1, x2 -> DataFields.compare(DataFields.valueOf(x1, simpleSort.field), DataFields.valueOf(x2, simpleSort.field))}
         }
 
         return dataset

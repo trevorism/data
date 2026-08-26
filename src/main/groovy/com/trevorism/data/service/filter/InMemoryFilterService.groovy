@@ -1,5 +1,7 @@
 package com.trevorism.data.service.filter
 
+import com.trevorism.data.DataFields
+import com.trevorism.data.model.exception.IncomparableFieldException
 import com.trevorism.data.model.exception.UnparseableDateException
 import com.trevorism.data.model.filtering.ComplexFilter
 import com.trevorism.data.model.filtering.FilterConstants
@@ -73,7 +75,10 @@ class InMemoryFilterService implements FilterService{
 
     private boolean applySimpleFilter(Map<String,Object> row, SimpleFilter filter) {
         def value = filter.value
-        def objField = row[filter.field.toLowerCase()]
+        def objField = DataFields.valueOf(row, filter.field)
+        if(DataFields.isStructured(objField))
+            throw new IncomparableFieldException("Cannot filter on list or map valued field: ${filter.field}")
+
         if(filter.type?.toLowerCase() == FilterConstants.TYPE_DATE){
             value = parseDateValue(value)
             if(objField instanceof String){
@@ -88,11 +93,11 @@ class InMemoryFilterService implements FilterService{
         }
         switch (filter.operator) {
             case FilterConstants.OPERATOR_EQUAL: return objField == value
-            case FilterConstants.OPERATOR_GREATER_THAN: return objField > value
-            case FilterConstants.OPERATOR_GREATER_THAN_OR_EQUAL: return objField >= value
-            case FilterConstants.OPERATOR_LESS_THAN: return objField < value
-            case FilterConstants.OPERATOR_LESS_THAN_OR_EQUAL: return objField <= value
             case FilterConstants.OPERATOR_NOT_EQUAL: return objField != value
+            case FilterConstants.OPERATOR_GREATER_THAN: return DataFields.compare(objField, value) > 0
+            case FilterConstants.OPERATOR_GREATER_THAN_OR_EQUAL: return DataFields.compare(objField, value) >= 0
+            case FilterConstants.OPERATOR_LESS_THAN: return DataFields.compare(objField, value) < 0
+            case FilterConstants.OPERATOR_LESS_THAN_OR_EQUAL: return DataFields.compare(objField, value) <= 0
         }
     }
 

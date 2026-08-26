@@ -1,5 +1,6 @@
 package com.trevorism.data.service.aggregate
 
+import com.trevorism.data.DataFields
 import com.trevorism.data.model.aggregating.Aggregation
 import com.trevorism.data.model.aggregating.AggregationConstants
 import com.trevorism.data.model.aggregating.AggregationFunction
@@ -26,13 +27,13 @@ class InMemoryAggregationService implements AggregationService{
         def groupMap = dataset.groupBy {obj ->
             def map = [:]
             request.groupBy.each {
-                map.put(it, obj[it])
+                map.put(it, DataFields.valueOf(obj, it))
             }
             return map
         }
 
         groupMap.collect { k,v ->
-            def map = k
+            def map = new LinkedHashMap(k)
             request.functions.each {
                 def value = computeAggregationValue(it, v)
                 map.put("${it.functionName}_${it.field}".toString(), value)
@@ -42,14 +43,17 @@ class InMemoryAggregationService implements AggregationService{
 
     }
 
-    private static def computeAggregationValue(AggregationFunction it, List<Map<String, Object>> v) {
-        switch (it.functionName) {
-            case AggregationConstants.FIRST: return v.first()[it.field]
-            case AggregationConstants.COUNT: return v.size()
-            case AggregationConstants.MAX: return v[it.field].max()
-            case AggregationConstants.MIN: return v[it.field].min()
-            case AggregationConstants.SUM: return v[it.field].sum()
-            case AggregationConstants.AVERAGE: return ((double)v[it.field].sum())/((double)v.size())
+    private static def computeAggregationValue(AggregationFunction function, List<Map<String, Object>> rows) {
+        List values = rows.collect { DataFields.valueOf(it, function.field) }
+        List present = values.findAll { it != null }
+
+        switch (function.functionName) {
+            case AggregationConstants.FIRST: return values.first()
+            case AggregationConstants.COUNT: return rows.size()
+            case AggregationConstants.MAX: return present ? present.max { a, b -> DataFields.compare(a, b) } : null
+            case AggregationConstants.MIN: return present ? present.min { a, b -> DataFields.compare(a, b) } : null
+            case AggregationConstants.SUM: return present ? present.sum() : null
+            case AggregationConstants.AVERAGE: return present ? ((double) present.sum()) / ((double) present.size()) : null
         }
     }
 }

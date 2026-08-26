@@ -2,6 +2,7 @@ package com.trevorism.data.controller
 
 import com.trevorism.data.model.combining.Join
 import com.trevorism.data.model.combining.SetOperation
+import com.trevorism.secure.Permissions
 import com.trevorism.secure.Roles
 import com.trevorism.secure.Secure
 import io.micronaut.http.MediaType
@@ -19,7 +20,7 @@ class CombineController {
     @Tag(name = "Combine Operations")
     @Operation(summary = "Perform a data operation and get a result **Secure")
     @Post(value = "/join", produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
-    @Secure(value = Roles.USER, allowInternal = true)
+    @Secure(value = Roles.USER, allowInternal = true, permissions = Permissions.READ)
     def join(@Body Join join) {
 
     }
@@ -27,7 +28,7 @@ class CombineController {
     @Tag(name = "Combine Operations")
     @Operation(summary = "Perform a data operation and get a result **Secure")
     @Post(value = "/intersection", produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
-    @Secure(value = Roles.USER, allowInternal = true)
+    @Secure(value = Roles.USER, allowInternal = true, permissions = Permissions.READ)
     def intersect(@Body SetOperation intersection) {
 
     }
@@ -35,7 +36,7 @@ class CombineController {
     @Tag(name = "Combine Operations")
     @Operation(summary = "Perform a data operation and get a result **Secure")
     @Post(value = "/union", produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
-    @Secure(value = Roles.USER, allowInternal = true)
+    @Secure(value = Roles.USER, allowInternal = true, permissions = Permissions.READ)
     def union(@Body SetOperation union) {
 
     }
@@ -43,7 +44,7 @@ class CombineController {
     @Tag(name = "Combine Operations")
     @Operation(summary = "Get results of a saved data operation **Secure")
     @Get(value = "{id}", produces = MediaType.APPLICATION_JSON)
-    @Secure(value = Roles.USER, allowInternal = true)
+    @Secure(value = Roles.USER, allowInternal = true, permissions = Permissions.READ)
     def operateById(String id) {
 
     }

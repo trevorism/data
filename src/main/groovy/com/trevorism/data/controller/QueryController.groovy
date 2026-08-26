@@ -5,6 +5,7 @@ import com.trevorism.data.model.Query
 import com.trevorism.data.service.QueryService
 import com.trevorism.data.service.query.InMemoryQueryService
 import com.trevorism.https.SecureHttpClient
+import com.trevorism.secure.Permissions
 import com.trevorism.secure.Roles
 import com.trevorism.secure.Secure
 import io.micronaut.http.MediaType
@@ -30,7 +31,7 @@ class QueryController {
     @Tag(name = "Query Operations")
     @Operation(summary = "Perform a data operation and get a result **Secure")
     @Post(value = "/", produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
-    @Secure(value = Roles.USER, allowInternal = true)
+    @Secure(value = Roles.USER, allowInternal = true, permissions = Permissions.READ)
     def operate(@Body Query query) {
         queryService.query(query)
     }
@@ -38,7 +39,7 @@ class QueryController {
     @Tag(name = "Query Operations")
     @Operation(summary = "Get results of a saved data operation **Secure")
     @Get(value = "{id}", produces = MediaType.APPLICATION_JSON)
-    @Secure(value = Roles.USER, allowInternal = true)
+    @Secure(value = Roles.USER, allowInternal = true, permissions = Permissions.READ)
     def operateById(String id) {
         def query = DataUtils.getById(httpClient, id, Query)
         operate(query)
