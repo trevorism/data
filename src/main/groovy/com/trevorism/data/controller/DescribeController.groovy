@@ -1,6 +1,5 @@
 package com.trevorism.data.controller
 
-
 import com.trevorism.data.model.describing.Describe
 import com.trevorism.data.service.DescribeService
 import com.trevorism.data.service.describe.InMemoryDescribeService

@@ -23,6 +23,8 @@ class ObjectController {
     private static final String DATASTORE_OBJECT_BASE_URL = "${DataUtils.DATASTORE_BASE_URL}/object"
     private static final String BIGQUERY_OBJECT_BASE_URL = "${DataUtils.BIGQUERY_BASE_URL}/object"
     private static final String MEMORY_OBJECT_BASE_URL = "${DataUtils.MEMORY_BASE_URL}/object"
+    private static final String BUCKET_OBJECT_BASE_URL = "${DataUtils.BUCKET_BASE_URL}/object"
+    private static final String CATALOG_OBJECT_BASE_URL = "${DataUtils.CATALOG_BASE_URL}/object"
 
     ObjectController(SecureHttpClient passThruSecureHttpClient) {
         this.httpClient = passThruSecureHttpClient
@@ -99,6 +101,10 @@ class ObjectController {
                 return BIGQUERY_OBJECT_BASE_URL
             case "memory":
                 return MEMORY_OBJECT_BASE_URL
+            case "bucket":
+                return BUCKET_OBJECT_BASE_URL
+            case "catalog":
+                return CATALOG_OBJECT_BASE_URL
             default:
                 return DATASTORE_OBJECT_BASE_URL
         }

@@ -1,3 +1,7 @@
+## 1.1.0
+
+Adding bucket to the data lookups
+
 ## 1.0.0
 
 Fix issue with data queries, and update dependencies. Also improve security model.

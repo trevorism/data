@@ -8,6 +8,10 @@ class DataUtils {
     static final String DATASTORE_BASE_URL = "https://datastore.data.trevorism.com"
     static final String BIGQUERY_BASE_URL = "https://bigquery.data.trevorism.com"
     static final String MEMORY_BASE_URL = "https://memory.data.trevorism.com"
+    static final String CATALOG_BASE_URL = "https://catalog.data.trevorism.com"
+    static final String BUCKET_BASE_URL = "https://bucket.data.trevorism.com"
+    static final String EVENT_BASE_URL = "https://event.data.trevorism.com"
+    static final String LIST_BASE_URL = "https://list.data.trevorism.com"
 
     static final Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").create()
 
