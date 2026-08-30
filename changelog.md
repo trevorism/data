@@ -1,3 +1,7 @@
+## 1.1.1
+
+Add the list data API to the lookup interface.
+
 ## 1.1.0
 
 Adding bucket to the data lookups

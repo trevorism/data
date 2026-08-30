@@ -15,6 +15,7 @@ class DatastoreLookupService implements LookupService {
     private static final String BIGQUERY_OBJECT_BASE_URL = "${DataUtils.BIGQUERY_BASE_URL}/object"
     private static final String MEMORY_OBJECT_BASE_URL = "${DataUtils.MEMORY_BASE_URL}/object"
     private static final String BUCKET_OBJECT_BASE_URL = "${DataUtils.BUCKET_BASE_URL}/object"
+    private static final String LIST_OBJECT_BASE_URL = "${DataUtils.LIST_BASE_URL}/object"
 
     DatastoreLookupService(SecureHttpClient client) {
         this.client = client
@@ -37,6 +38,8 @@ class DatastoreLookupService implements LookupService {
             url = "$MEMORY_OBJECT_BASE_URL/$kind"
         if (datasource == "bucket")
             url = "$BUCKET_OBJECT_BASE_URL/$kind"
+        if (datasource == "list")
+            url = "$LIST_OBJECT_BASE_URL/$kind"
 
         String json = client.get(url)
         return gson.fromJson(json, List)

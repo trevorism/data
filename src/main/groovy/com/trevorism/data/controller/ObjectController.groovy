@@ -25,6 +25,7 @@ class ObjectController {
     private static final String MEMORY_OBJECT_BASE_URL = "${DataUtils.MEMORY_BASE_URL}/object"
     private static final String BUCKET_OBJECT_BASE_URL = "${DataUtils.BUCKET_BASE_URL}/object"
     private static final String CATALOG_OBJECT_BASE_URL = "${DataUtils.CATALOG_BASE_URL}/object"
+    private static final String LIST_OBJECT_BASE_URL = "${DataUtils.LIST_BASE_URL}/object"
 
     ObjectController(SecureHttpClient passThruSecureHttpClient) {
         this.httpClient = passThruSecureHttpClient
@@ -105,6 +106,8 @@ class ObjectController {
                 return BUCKET_OBJECT_BASE_URL
             case "catalog":
                 return CATALOG_OBJECT_BASE_URL
+            case "list":
+                return LIST_OBJECT_BASE_URL
             default:
                 return DATASTORE_OBJECT_BASE_URL
         }
